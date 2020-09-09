@@ -5,18 +5,14 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "globals.c"
-#include "configurations.c"
-#include "field.c"
-#include "plants.c"
-#include "zombies.c"
-#include "waves.c"
-
 
 void process_input();
 void proper_shutdown(void);
 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
+
+#include "render.c"
 
 int main(int argc, char *argv[])
 {
@@ -60,7 +56,7 @@ int main(int argc, char *argv[])
         // our freshly spawned cow:
         process_input();
 
-        // Render redrawn scene to front buffer, showing it in the
+        renderOuterFieldTile(300,80);
         // actual window:
         SDL_RenderPresent(renderer);
         // Remember ~ 60 FPS of smooth Greta movements - PC Master Race!
@@ -80,14 +76,12 @@ void process_input()
             case SDL_QUIT:
                 proper_shutdown();
                 exit(0);
-                break;
             case SDL_KEYDOWN:
                 switch (event.key.keysym.scancode)
                 {
                     case SDL_SCANCODE_ESCAPE:
                         proper_shutdown();
                         exit(0);
-                        break;
                     default:
                         break;
                 }
