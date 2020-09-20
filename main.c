@@ -4,21 +4,57 @@
  */
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_timer.h>
 #include "globals.c"
 
+int random_int(int min, int max);
+void setup_screen();
 void process_input();
 void proper_shutdown(void);
 
-SDL_Window *window = NULL;
-SDL_Renderer *renderer = NULL;
 
 #include "render.c"
+#include "timers.c"
 
 int main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
 
+    setup_screen();
+
+
+    while (1)
+    {
+        // Refresh the backbuffer to its original state:
+        // RGB (39, 174, 96) should be a green grass color
+        SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
+        SDL_RenderClear(renderer);
+        // Process selected inputs and pay close attention to moving
+        // our freshly spawned cow:
+        process_input();
+
+
+        printf("%d\n", SDL_GetTicks() - sunTimer);
+        renderOuterFieldTile(300,80);
+
+        renderSunProcess();
+
+//        renderSun(50,50);
+        // actual window:
+        SDL_RenderPresent(renderer);
+        // Remember ~ 60 FPS - PC Master Race!
+        SDL_Delay(16);
+    }
+
+    return 0;
+}
+
+int random_int(int min, int max) {
+    return min + rand() % (max+1 - min);
+}
+
+void setup_screen() {
     unsigned int window_flags = 0;
     unsigned int renderer_flags = SDL_RENDERER_ACCELERATED;
 
@@ -41,29 +77,10 @@ int main(int argc, char *argv[])
     renderer = SDL_CreateRenderer(window, -1, renderer_flags);
     if (renderer == NULL) // error handling:
     {
-        printf("Failed to create renderer -- Error: %s\n",
+        printf("FaUint32iled to create renderer -- Error: %s\n",
                SDL_GetError());
         exit(1);
     }
-
-    while (1)
-    {
-        // Refresh the backbuffer to its original state:
-        // RGB (39, 174, 96) should be a green grass color
-        SDL_SetRenderDrawColor(renderer, BACKGROUND_COLOR);
-        SDL_RenderClear(renderer);
-        // Process selected inputs and pay close attention to moving
-        // our freshly spawned cow:
-        process_input();
-
-        renderOuterFieldTile(300,80);
-        // actual window:
-        SDL_RenderPresent(renderer);
-        // Remember ~ 60 FPS of smooth Greta movements - PC Master Race!
-        SDL_Delay(16);
-    }
-
-    return 0;
 }
 
 void process_input()
@@ -91,6 +108,7 @@ void process_input()
         }
     }
 }
+
 
 void proper_shutdown(void)
 {

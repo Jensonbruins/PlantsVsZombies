@@ -27,3 +27,9 @@ void renderOuterFieldTile(int startX, int startY) {
         }
     }
 }
+
+void renderSun(int x, int y) {
+    SDL_Rect sunBody = {x,y,15,15};
+    SDL_SetRenderDrawColor(renderer, 247, 202, 24, 255);
+    SDL_RenderFillRect(renderer, &sunBody);
+}
