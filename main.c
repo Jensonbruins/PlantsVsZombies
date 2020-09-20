@@ -4,7 +4,7 @@
  */
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_image.h>
 #include "globals.c"
 
 void setup_screen();
@@ -71,7 +71,7 @@ void setup_screen() {
     renderer = SDL_CreateRenderer(window, -1, renderer_flags);
     if (renderer == NULL) // error handling:
     {
-        printf("FaUint32iled to create renderer -- Error: %s\n",
+        printf("Failed to create renderer -- Error: %s\n",
                SDL_GetError());
         exit(1);
     }
