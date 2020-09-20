@@ -13,12 +13,12 @@
 /*
  * Timer creations
  */
-Uint32 sunTimer = 0;
+//Uint32 sunTimer = 0;
 
 /*
  * Timestamps
  */
-Uint32 sunTimerTimestamp = 0;
+//Uint32 sunTimerTimestamp = 0;
 
 /*
  * SDL defines

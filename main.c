@@ -34,11 +34,9 @@ int main(int argc, char *argv[])
         // our freshly spawned cow:
         process_input();
 
-
-        printf("%d\n", SDL_GetTicks() - sunTimer);
-        renderOuterFieldTile(300,80);
-
-        renderSunProcess();
+//        renderOuterFieldTile(300,80);
+//
+//        renderSunProcess();
 
 //        renderSun(50,50);
         // actual window:
@@ -50,9 +48,9 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int random_int(int min, int max) {
-    return min + rand() % (max+1 - min);
-}
+//int random_int(int min, int max) {
+//    return min + rand() % (max+1 - min);
+//}
 
 void setup_screen() {
     unsigned int window_flags = 0;
