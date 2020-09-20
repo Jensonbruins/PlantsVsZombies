@@ -5,9 +5,10 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_image.h>
 #include "globals.c"
 
-int random_int(int min, int max);
+//int random_int(int min, int max);
 void setup_screen();
 void process_input();
 void proper_shutdown(void);
@@ -23,6 +24,10 @@ int main(int argc, char *argv[])
 
     setup_screen();
 
+    IMG_Init(IMG_INIT_PNG);
+    SDL_Texture *txtr_background;
+    txtr_background = load_texture("../gfx/background.png");
+
 
     while (1)
     {
@@ -33,6 +38,8 @@ int main(int argc, char *argv[])
         // Process selected inputs and pay close attention to moving
         // our freshly spawned cow:
         process_input();
+
+        blit(txtr_background, 0, 0, 0);
 
 //        renderOuterFieldTile(300,80);
 //
