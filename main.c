@@ -5,10 +5,8 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_timer.h>
-#include <SDL2/SDL_image.h>
 #include "globals.c"
 
-//int random_int(int min, int max);
 void setup_screen();
 void process_input();
 void proper_shutdown(void);
@@ -41,11 +39,6 @@ int main(int argc, char *argv[])
 
         blit(txtr_background, 0, 0, 0);
 
-//        renderOuterFieldTile(300,80);
-//
-//        renderSunProcess();
-
-//        renderSun(50,50);
         // actual window:
         SDL_RenderPresent(renderer);
         // Remember ~ 60 FPS - PC Master Race!
@@ -54,10 +47,6 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-//int random_int(int min, int max) {
-//    return min + rand() % (max+1 - min);
-//}
 
 void setup_screen() {
     unsigned int window_flags = 0;

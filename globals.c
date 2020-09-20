@@ -7,19 +7,6 @@
 #define SCREEN_HEIGHT  900
 #define BACKGROUND_COLOR 122, 62, 0, 255
 
-#define OUTER_TILE_SIZE 160
-#define INNER_TILE_OFFSET 5
-
-/*
- * Timer creations
- */
-//Uint32 sunTimer = 0;
-
-/*
- * Timestamps
- */
-//Uint32 sunTimerTimestamp = 0;
-
 /*
  * SDL defines
  */
