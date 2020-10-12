@@ -12,5 +12,4 @@
 #include "modules/gfx/blitting/blitting.h"
 #include "modules/gfx/timing/timing.h"
 #include "modules/sfx/sfx.h"
-
 #endif //PLANTSVSZOMBIES_MODULES_H
