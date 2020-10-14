@@ -1,5 +1,5 @@
-#include "modules.h"
-#include "zombieBlueprints.h"
+#include "includes/zombieBlueprints.h"
+#include "modules/modules.h"
 
 SDL_Window *window = NULL;
 SDL_Renderer *renderer = NULL;
@@ -7,15 +7,17 @@ SDL_Renderer *renderer = NULL;
 static void init_sdl();
 
 int main(int argc, char *argv[]) {
-    (void)argc;
-    (void)argv;
+    (void) argc;
+    (void) argv;
 
     init_sdl();
 
     zombie test;
     init_zombie(&test);
-    texture_initializer(renderer, "gfx/zombie/male1/", "walk_", test.amountWalkTexture, (SDL_Texture **)&test.textureWalk);
-    texture_initializer(renderer, "gfx/zombie/male1/", "attack_", test.amountAttackTexture, (SDL_Texture **)&test.textureAttack);
+    texture_initializer(renderer, "gfx/zombie/male1/", "walk_", test.amountWalkTexture,
+                        (SDL_Texture * *) & test.textureWalk);
+    texture_initializer(renderer, "gfx/zombie/male1/", "attack_", test.amountAttackTexture,
+                        (SDL_Texture * *) & test.textureAttack);
 
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
@@ -30,7 +32,7 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
-        draw_zombie(renderer,&test);
+        draw_zombie(renderer, &test);
         move_zombie(&test);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
@@ -49,7 +51,8 @@ static void init_sdl() {
         printf("Couldn't initialize SDL: %s\n", SDL_GetError());
         exit(1);
     }
-    window = SDL_CreateWindow("PlantsVsZombies", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, window_flags);
+    window = SDL_CreateWindow("PlantsVsZombies", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+                              SCREEN_HEIGHT, window_flags);
     if (window == NULL) {
         printf("Failed to create window -- Error: %s\n", SDL_GetError());
         exit(1);
