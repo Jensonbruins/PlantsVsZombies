@@ -34,3 +34,9 @@ static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y,
 extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTexture) {
     blit(renderer, backgroundTexture, 0, 0, 0);
 }
+
+extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
+    if (zombie->components.health < 0) {
+        blit(renderer, zombie->textureWalk[0], zombie->components.x, zombie->components.y, 0);
+    }
+}

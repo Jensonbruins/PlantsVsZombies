@@ -7,6 +7,7 @@
 typedef struct _entity_ {
     int x;
     int y;
+    int priority;
     int health;
 } entity;
 #endif //PLANTSVSZOMBIES_ENTITYBLUEPRINTS_H

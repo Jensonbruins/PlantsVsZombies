@@ -5,11 +5,15 @@
 #ifndef PLANTSVSZOMBIES_ZOMBIEBLUEPRINTS_H
 #define PLANTSVSZOMBIES_ZOMBIEBLUEPRINTS_H
 #include "entityBlueprints.h"
+#include "sdl.h"
 typedef struct _zombie_ {
     entity components;
-    int priority;
-    SDL_Texture *textureWalk[];
-    SDL_Texture *textureAttack[];
-    SDL_Texture *textureDie[];
+    int state;
+    int walkCounter;
+    SDL_Texture *textureWalk[10];
+    int attackCounter;
+    SDL_Texture *textureAttack[9];
+    int dieCounter;
+    SDL_Texture *textureDie[12];
 } zombie;
 #endif //PLANTSVSZOMBIES_ZOMBIEBLUEPRINTS_H
