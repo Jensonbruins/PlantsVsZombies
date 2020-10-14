@@ -28,7 +28,7 @@ input.o:
 move:
 	mv *.o $(OBJECTS)
 
-plants.o: input.o
+plants.o: input.o filesystem.o
 	$(CC) $(CFLAGS) -c modules/entities/plants/plants.c
 
 sfx.o:

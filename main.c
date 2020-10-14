@@ -20,12 +20,7 @@ int main(int argc, char *argv[]) {
     texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture * *) & sunGuiObject.texture);
 
     zombie test;
-    init_zombie(&test);
-    texture_initializer(renderer, "gfx/zombie/male1/", "walk_", test.amountWalkTexture,
-                        (SDL_Texture * *) & test.textureWalk);
-    texture_initializer(renderer, "gfx/zombie/male1/", "attack_", test.amountAttackTexture,
-                        (SDL_Texture * *) & test.textureAttack);
-
+    init_zombie(renderer, &test);
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
 

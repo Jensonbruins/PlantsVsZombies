@@ -4,7 +4,7 @@
 
 #include "zombies.h"
 
-extern void init_zombie(zombie *zombie) {
+extern void init_zombie(SDL_Renderer *renderer, zombie *zombie) {
     zombie->components.x = 1400;
     zombie->components.y = 50;
     zombie->components.health = 50;
@@ -19,6 +19,11 @@ extern void init_zombie(zombie *zombie) {
     zombie->amountWalkTexture = 20;
     zombie->amountAttackTexture = 11;
     zombie->amountDieTexture = 0;
+    texture_initializer(renderer, "gfx/zombie/male1/", "walk_", zombie->amountWalkTexture,
+                        (SDL_Texture * *) & zombie->textureWalk);
+    texture_initializer(renderer, "gfx/zombie/male1/", "attack_", zombie->amountAttackTexture,
+                        (SDL_Texture * *) & zombie->textureAttack);
+
 }
 
 extern void move_zombie(zombie *zombie) {
