@@ -9,6 +9,7 @@
 typedef struct _zombie_ {
     entity components;
     int state;
+    int slowDownCounter;
     int walkCounter;
     SDL_Texture *textureWalk[10];
     int attackCounter;
