@@ -65,3 +65,19 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
 //        }
     }
 }
+
+extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object) {
+
+    object->delayCounter++;
+    if (object->delayCounter >= 10) {
+        if (object->counter == 0) {
+            object->counter = 1;
+        } else {
+            object->counter = 0;
+        }
+        object->delayCounter = 0;
+    }
+
+    blit(renderer, object->texture[object->counter], 400, 5);
+
+}

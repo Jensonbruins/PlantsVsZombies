@@ -1,4 +1,5 @@
 #include "includes/zombieBlueprints.h"
+#include "includes/plantBlueprints.h"
 #include "modules/modules.h"
 
 SDL_Window *window = NULL;
@@ -11,6 +12,12 @@ int main(int argc, char *argv[]) {
     (void) argv;
 
     init_sdl();
+
+    sunGui sunGuiObject;
+    sunGuiObject.delayCounter = 0;
+    sunGuiObject.amount = 0;
+    sunGuiObject.counter = 0;
+    texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture * *) & sunGuiObject.texture);
 
     zombie test;
     init_zombie(&test);
@@ -32,6 +39,7 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
+        draw_sun_gui(renderer, &sunGuiObject);
         draw_zombie(renderer, &test);
         move_zombie(&test);
 
