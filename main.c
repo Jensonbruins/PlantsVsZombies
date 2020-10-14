@@ -34,10 +34,11 @@ int main(int argc, char *argv[]) {
     unsigned int frameTime;
     while (1) {
         firstFrame = SDL_GetTicks();                                    // Frame cap logic
+        process_input(window, renderer);                                // Process key input and mouse input
         SDL_SetRenderDrawColor(renderer, 120, 144, 156, 255);           // Background color
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
-        process_input(window, renderer);                                // Process key input and mouse input
+        draw_background(renderer, backgroundTexture);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic
