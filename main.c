@@ -40,6 +40,8 @@ int main(int argc, char *argv[]) {
         SDL_SetRenderDrawColor(renderer, 120, 144, 156, 255);
         SDL_RenderClear(renderer);
 
+        process_input(window, renderer);
+
         SDL_RenderPresent(renderer);
         frameTime = SDL_GetTicks() - firstFrame;
         if (1000 / (unsigned int) Fps> frameTime) {
