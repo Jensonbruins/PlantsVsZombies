@@ -29,6 +29,9 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+    IMG_Init(IMG_INIT_PNG);
+    SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
+
     int Fps = 60;
     unsigned int firstFrame;
     unsigned int frameTime;
