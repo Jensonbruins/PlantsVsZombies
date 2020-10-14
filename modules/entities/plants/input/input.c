@@ -7,6 +7,8 @@ static void proper_shutdown(SDL_Renderer *renderer, SDL_Window *window);
 
 extern void process_input(SDL_Window *window, SDL_Renderer *renderer) {
     SDL_Event event;
+    int mouseX;
+    int mouseY;
     while (SDL_PollEvent(&event))
     {
         switch (event.type)
@@ -16,6 +18,8 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer) {
                 exit(0);
                 break;
             case SDL_MOUSEBUTTONDOWN:
+                SDL_GetMouseState(&mouseX,&mouseY);
+//                handle_click(mouseX,mouseY);
                 break;
             case SDL_KEYDOWN:
                 if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
