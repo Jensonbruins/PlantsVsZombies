@@ -4,19 +4,14 @@
 
 #include "blitting.h"
 
-static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, int center);
+static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y);
 static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle);
 
-static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, int center) {
+static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y) {
     SDL_Rect dest;
     dest.x = x;
     dest.y = y;
     SDL_QueryTexture(txtr, NULL, NULL, &dest.w, &dest.h);
-    if (center)
-    {
-        dest.x -= dest.w / 2;
-        dest.y -= dest.h / 2;
-    }
     SDL_RenderCopy(renderer, txtr, NULL, &dest);
 }
 
@@ -32,11 +27,14 @@ static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y,
 
 
 extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTexture) {
-    blit(renderer, backgroundTexture, 0, 0, 0);
+    blit(renderer, backgroundTexture, 0, 0);
 }
 
 extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
-    if (zombie->components.health < 0) {
-        blit(renderer, zombie->textureWalk[0], zombie->components.x, zombie->components.y, 0);
+    if (zombie->components.health > 0) {
+        if (zombie->state == 0) {
+
+            blit(renderer, zombie->textureWalk[0], zombie->components.x, zombie->components.y);
+        }
     }
 }

@@ -8,7 +8,7 @@ extern void texture_initializer(SDL_Renderer *renderer, char *path, char *filePr
     for(int temp = 0; temp < amountTextures; temp++) {
         char filename[50];
 
-        sprintf(filename, "%s%s%d.png", path, filePrefix, temp);
+        sprintf(filename, "%s%s%d.png", path, filePrefix, (temp + 1));
         printf("Loading texture %s\n", filename);
 
         textureSet[temp] = texture_loader(renderer, filename);

@@ -14,7 +14,8 @@ int main(int argc, char *argv[]) {
 
     zombie test;
     init_zombie(&test);
-    test.textureWalk[0] = texture_loader(renderer, "gfx/zombie/male/walk_1.png");
+    texture_initializer(renderer, "gfx/zombie/male/", "walk_", 8, (SDL_Texture **)&test.textureWalk);
+
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
 
