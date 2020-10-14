@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
         SDL_SetRenderDrawColor(renderer, 120, 144, 156, 255);           // Background color
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
-        draw_background(renderer, backgroundTexture);
+        draw_background(renderer, backgroundTexture);                   // Set background
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic
