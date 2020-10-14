@@ -33,8 +33,17 @@ extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTextu
 extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
     if (zombie->components.health > 0) {
         if (zombie->state == 0) {
+            blit(renderer, zombie->textureWalk[zombie->walkCounter], zombie->components.x, zombie->components.y);
+            zombie->walkCounter++;
+            if (zombie->walkCounter >= 10) {
+                zombie->walkCounter = 0;
+            }
+        }
+        if (zombie->state == 1) {
 
-            blit(renderer, zombie->textureWalk[0], zombie->components.x, zombie->components.y);
+        }
+        if (zombie->state == 2) {
+
         }
     }
 }

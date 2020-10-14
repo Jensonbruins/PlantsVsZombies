@@ -10,4 +10,5 @@ extern void init_zombie(zombie *zombie) {
     zombie->components.health = 50;
     zombie->components.priority = 0;
     zombie->state = 0;
+    zombie->walkCounter = 0;
 }
