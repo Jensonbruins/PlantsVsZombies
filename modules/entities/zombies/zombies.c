@@ -22,7 +22,9 @@ extern void init_zombie(zombie *zombie) {
 }
 
 extern void move_zombie(zombie *zombie) {
+    if (zombie->slowDownCounter >= 4) {
         if (zombie->components.x >= 250) {
             zombie->components.x = zombie->components.x - 2;
         }
+    }
 }
