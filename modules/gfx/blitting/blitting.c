@@ -43,12 +43,23 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
                 zombie->slowDownCounter = 0;
             }
 
-            if (zombie->walkCounter >= 10) {
+            if (zombie->walkCounter >= zombie->amountWalkTexture) {
                 zombie->walkCounter = 0;
             }
         }
         if (zombie->state == 1) {
+            blit(renderer, zombie->textureAttack[zombie->attackCounter], zombie->components.x, zombie->components.y);
 
+            zombie->slowDownCounter++;
+
+            if (zombie->slowDownCounter >= 5) {
+                zombie->attackCounter++;
+                zombie->slowDownCounter = 0;
+            }
+
+            if (zombie->attackCounter >= zombie->amountAttackTexture) {
+                zombie->attackCounter = 0;
+            }
         }
         if (zombie->state == 2) {
 

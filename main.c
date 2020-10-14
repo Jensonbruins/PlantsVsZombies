@@ -14,7 +14,8 @@ int main(int argc, char *argv[]) {
 
     zombie test;
     init_zombie(&test);
-    texture_initializer(renderer, "gfx/zombie/male/", "walk_", 10, (SDL_Texture **)&test.textureWalk);
+    texture_initializer(renderer, "gfx/zombie/male1/", "walk_", test.amountWalkTexture, (SDL_Texture **)&test.textureWalk);
+    texture_initializer(renderer, "gfx/zombie/male1/", "attack_", test.amountAttackTexture, (SDL_Texture **)&test.textureAttack);
 
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
@@ -30,6 +31,7 @@ int main(int argc, char *argv[]) {
 
         draw_background(renderer, backgroundTexture);                   // Set background
         draw_zombie(renderer,&test);
+        move_zombie(&test);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic
