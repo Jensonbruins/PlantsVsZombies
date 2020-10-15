@@ -13,15 +13,7 @@ typedef struct _gridBlock_ {
 
 typedef struct _lane_ {
     int y;
-    gridBlock block1;
-    gridBlock block2;
-    gridBlock block3;
-    gridBlock block4;
-    gridBlock block5;
-    gridBlock block6;
-    gridBlock block7;
-    gridBlock block8;
-    gridBlock block9;
+    gridBlock blockArray[9];
 } lane;
 
 typedef struct _plant_ {

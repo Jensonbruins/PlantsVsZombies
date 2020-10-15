@@ -5,7 +5,6 @@
 #include "blitting.h"
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y);
-static gridBlock get_block(lane lane, int blockId);
 //static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle);
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y) {
@@ -74,7 +73,7 @@ extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
 
             object->delayCounter++;
 
-            if (object->delayCounter >= 5) {
+            if (object->delayCounter >= 4) {
                 object->idleCounter++;
                 object->delayCounter = 0;
             }
@@ -86,31 +85,19 @@ extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
     }
 }
 
-static gridBlock get_block(lane lane, int blockId) {
-    switch(blockId) {
-        case 1: return lane.block1;
-        case 2: return lane.block2;
-        case 3: return lane.block3;
-        case 4: return lane.block4;
-        case 5: return lane.block5;
-        case 6: return lane.block6;
-        case 7: return lane.block7;
-        case 8: return lane.block8;
-        case 9: return lane.block9;
-        default: exit(1);
-    }
-}
-
 extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantArray[45]) {
     for(int row = 0; row <= 4; row++) {
         int y = laneArray[row].y;
-
-        for (int block = 1; block <= 9; block++) {
-            gridBlock gridObject = get_block((laneArray[row]), block);
-            if (gridObject.plantId > 45) {
+//        printf("%d\n", y);
+        for (int column = 0; column <= 8; column++) {
+            int plantId = laneArray[row].blockArray[column].plantId;
+//            printf("%d\n", laneArray[row].blockArray[column].x);
+            if (plantId > 45) {
                 break;
             }
-            draw_plant(renderer, &plantArray[gridObject.plantId], gridObject.x, y);
+
+            int x = laneArray[row].blockArray[column].x;
+            draw_plant(renderer,&plantArray[plantId],x,y);
         }
     }
 }

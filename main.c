@@ -29,13 +29,34 @@ int main(int argc, char *argv[]) {
     int noPlant = 50;
     int block1 = 410; int block2 = 540; int block3 = 670; int block4 = 800; int block5 = 920; int block6 = 1050; int block7 = 1170; int block8 = 1300; int block9 = 1430;
 
-    lane laneArray[5] = {
-            {100, {block1, 0}, {block2, noPlant}, {block3, noPlant}, {block4, noPlant}, {block5,noPlant}, {block6, noPlant}, {block7, noPlant}, {block8, noPlant}, {block9, noPlant}},
-            {270, {block1, 1}, {block2, noPlant}, {block3, noPlant}, {block4, noPlant}, {block5,noPlant}, {block6, noPlant}, {block7, noPlant}, {block8, noPlant}, {block9, noPlant}},
-            {420, {block1, noPlant}, {block2, noPlant}, {block3, noPlant}, {block4, noPlant}, {block5,noPlant}, {block6, noPlant}, {block7, noPlant}, {block8, noPlant}, {block9, noPlant}},
-            {560, {block1, noPlant}, {block2, noPlant}, {block3, noPlant}, {block4, noPlant}, {block5,noPlant}, {block6, noPlant}, {block7, noPlant}, {block8, noPlant}, {block9, noPlant}},
-            {700, {block1, noPlant}, {block2, noPlant}, {block3, noPlant}, {block4, noPlant}, {block5,noPlant}, {block6, noPlant}, {block7, noPlant}, {block8, noPlant}, {block9, noPlant}}
+    gridBlock blockArray[9] = {
+            {block1, noPlant},
+            {block2, noPlant},
+            {block3, noPlant},
+            {block4, noPlant},
+            {block5, noPlant},
+            {block6, noPlant},
+            {block7, noPlant},
+            {block8, noPlant},
+            {block9, noPlant}
     };
+
+    printf("%d,%d\n", blockArray[0].x, blockArray[0].plantId);
+
+
+    lane laneArray[5] = {
+            { 120 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            { 270 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            { 420 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            { 560 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            { 700 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}}
+    };
+
+
+    laneArray[0].blockArray[0].plantId = 0;
+    laneArray[1].blockArray[0].plantId = 1;
+
+    printf("%d,%d\n", laneArray[0].blockArray[0].x, laneArray[0].blockArray[0].plantId);
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
     TTF_Font *font = TTF_OpenFont("gfx/hud/sun/arial.ttf", 28);
