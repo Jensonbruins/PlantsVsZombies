@@ -5,6 +5,7 @@
 #include "blitting.h"
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y);
+static gridBlock get_block(lane lane, int blockId);
 //static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle);
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y) {
@@ -66,10 +67,10 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie *object) {
 //        }
 }
 
-extern void draw_plant(SDL_Renderer *renderer, plant *object) {
+extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
     if (object->components.health > 0) {
         if (object->state == 0) {
-            blit(renderer, object->textureIdle[object->idleCounter], object->components.x, object->components.y);
+            blit(renderer, object->textureIdle[object->idleCounter], x, y);
 
             object->delayCounter++;
 
@@ -81,6 +82,36 @@ extern void draw_plant(SDL_Renderer *renderer, plant *object) {
             if (object->idleCounter >= object->amountIdleTexture) {
                 object->idleCounter = 0;
             }
+        }
+    }
+}
+
+static gridBlock get_block(lane lane, int blockId) {
+    switch(blockId) {
+        case 1: return lane.block1;
+        case 2: return lane.block2;
+        case 3: return lane.block3;
+        case 4: return lane.block4;
+        case 5: return lane.block5;
+        case 6: return lane.block6;
+        case 7: return lane.block7;
+        case 8: return lane.block8;
+        case 9: return lane.block9;
+        default: exit(1);
+    }
+}
+
+extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantArray[45]) {
+    for(int row = 0; row <= 4; row++) {
+        int y = laneArray[row].y;
+
+        for (int block = 1; block <= 9; block++) {
+            gridBlock gridObject = get_block((laneArray[row]), block);
+            if (gridObject.plantId > 45) {
+                break;
+            }
+            draw_plant(renderer, &plantArray[gridObject.plantId], gridObject.x, y);
+            fprintf(stdout,"%d, %d\n", y,gridObject.x);
         }
     }
 }

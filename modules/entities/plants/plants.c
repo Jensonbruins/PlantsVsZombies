@@ -6,7 +6,7 @@
 
 extern void init_plant(SDL_Renderer *renderer, plant *plant) {
     plant->components.x = 410;
-    plant->components.y = 100;
+    plant->components.y = 700;
     plant->components.health = 50;
     plant->components.priority = 0;
     plant->state = 0;

@@ -6,6 +6,25 @@
 #define PLANTSVSZOMBIES_PLANTBLUEPRINTS_H
 #include "entityBlueprints.h"
 #include "sdl.h"
+
+typedef struct _gridBlock_ {
+    int x;
+    int plantId;
+} gridBlock;
+
+typedef struct _lane_ {
+    int y;
+    gridBlock block1;
+    gridBlock block2;
+    gridBlock block3;
+    gridBlock block4;
+    gridBlock block5;
+    gridBlock block6;
+    gridBlock block7;
+    gridBlock block8;
+    gridBlock block9;
+} lane;
+
 typedef struct _plant_ {
     entity components;
     int state;
