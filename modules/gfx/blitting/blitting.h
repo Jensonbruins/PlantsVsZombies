@@ -8,5 +8,5 @@
 #include "../../../includes/plantBlueprints.h"
 extern void draw_background(SDL_Renderer *renderer, SDL_Texture *txtr);
 extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie);
-extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object);
+extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object, TTF_Font *font);
 #endif //PLANTSVSZOMBIES_BLITTING_H

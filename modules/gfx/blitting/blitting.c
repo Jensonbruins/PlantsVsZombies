@@ -66,7 +66,7 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
     }
 }
 
-extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object) {
+extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object, TTF_Font *font) {
 
     object->delayCounter++;
     if (object->delayCounter >= 10) {
@@ -78,11 +78,26 @@ extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object) {
         object->delayCounter = 0;
     }
 
-    SDL_Rect outerBox = {402, 8, 160, 44};
+    SDL_Rect outerBox = {402, 8, 130, 44};
     SDL_SetRenderDrawColor(renderer, 113, 80, 8, 255);           // Background color
     SDL_RenderFillRect(renderer, &outerBox);
-    SDL_Rect innerBox = {450, 12, 108, 36};
+
+    SDL_Rect innerBox = {450, 12, 78, 36};
     SDL_SetRenderDrawColor(renderer, 230, 214, 157, 255);           // Background color
     SDL_RenderFillRect(renderer, &innerBox);
+
+    char amount[50];
+    int textWidth, textHeight;
+    sprintf(amount, "%d", object->amount);
+
+    SDL_Color colorBlack = {0,0,0, 255};
+    SDL_Surface *surface = TTF_RenderText_Solid(font, amount, colorBlack);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    TTF_SizeText(font, amount, &textWidth, &textHeight);
+    SDL_Rect textBox = {456, 14, textWidth,textHeight};
+    SDL_RenderCopy(renderer, texture, NULL, &textBox);
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
+
     blit(renderer, object->texture[object->counter], 400, 5);
 }

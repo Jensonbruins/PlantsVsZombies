@@ -14,26 +14,24 @@ int main(int argc, char *argv[]) {
     init_sdl();
 
     sunGui sunGuiObject;
-    sunGuiObject.delayCounter = 0;
-    sunGuiObject.amount = 0;
-    sunGuiObject.counter = 0;
-    texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture * *) & sunGuiObject.texture);
+    init_sun_hud(renderer, &sunGuiObject);
 
     zombie test;
     init_zombie(renderer, &test);
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
+    TTF_Font *font = TTF_OpenFont("gfx/hud/sun/arial.ttf", 28);
 
     int fps = 60;
     unsigned int firstFrame;
     unsigned int frameTime;
     while (1) {
         firstFrame = SDL_GetTicks();                                    // Frame cap logic
-        process_input(window, renderer);                                // Process key input and mouse input
+        process_input(window, renderer, font);                          // Process key input and mouse input
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
-        draw_sun_gui(renderer, &sunGuiObject);
+        draw_sun_gui(renderer, &sunGuiObject, font);
         draw_zombie(renderer, &test);
         move_zombie(&test);
 
@@ -53,6 +51,15 @@ static void init_sdl() {
         printf("Couldn't initialize SDL: %s\n", SDL_GetError());
         exit(1);
     }
+    if(TTF_Init() < 0) {
+        printf("Failed to initialize SDL_ttf: %s\n", SDL_GetError());
+        exit(1);
+    }
+    if (!(IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)) {
+        printf("Failed to initialize SDL_image: %s\n", SDL_GetError());
+        exit(1);
+    }
+
     window = SDL_CreateWindow("PlantsVsZombies", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
                               SCREEN_HEIGHT, window_flags);
     if (window == NULL) {
@@ -68,6 +75,4 @@ static void init_sdl() {
         printf("Failed to create mixer -- Error: %s\n", SDL_GetError());
         exit(1);
     }
-
-    IMG_Init(IMG_INIT_PNG);
 }
