@@ -32,9 +32,9 @@ extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTextu
 }
 
 extern void draw_zombie(SDL_Renderer *renderer, zombie *object) {
-    if (object->components.health > 0) {
+    if (object->health > 0) {
         if (object->state == 0) {
-            blit(renderer, object->textureWalk[object->walkCounter], object->components.x, object->components.y);
+            blit(renderer, object->textureWalk[object->walkCounter], object->x, object->y);
 
             object->delayCounter++;
 
@@ -68,7 +68,7 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie *object) {
 }
 
 extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
-    if (object->components.health > 0) {
+    if (object->health > 0) {
         if (object->state == 0) {
             blit(renderer, object->textureIdle[object->idleCounter], x, y);
 
@@ -111,7 +111,6 @@ extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantAr
                 break;
             }
             draw_plant(renderer, &plantArray[gridObject.plantId], gridObject.x, y);
-            fprintf(stdout,"%d, %d\n", y,gridObject.x);
         }
     }
 }

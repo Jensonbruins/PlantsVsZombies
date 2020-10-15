@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 
     int noPlant = 50;
     int block1 = 410; int block2 = 540; int block3 = 670; int block4 = 800; int block5 = 920; int block6 = 1050; int block7 = 1170; int block8 = 1300; int block9 = 1430;
+
     lane laneArray[5] = {
             {100, {block1, 0}, {block2, noPlant}, {block3, noPlant}, {block4, noPlant}, {block5,noPlant}, {block6, noPlant}, {block7, noPlant}, {block8, noPlant}, {block9, noPlant}},
             {270, {block1, 1}, {block2, noPlant}, {block3, noPlant}, {block4, noPlant}, {block5,noPlant}, {block6, noPlant}, {block7, noPlant}, {block8, noPlant}, {block9, noPlant}},
@@ -49,12 +50,10 @@ int main(int argc, char *argv[]) {
 
         draw_background(renderer, backgroundTexture);                   // Set background
         draw_sun_gui(renderer, &sunHudObject, font);
+        draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
         draw_zombie(renderer, &zombieObject);
         move_zombie(&zombieObject);
 
-        draw_plant(renderer, &plantObject, 50, 50);
-
-        draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic

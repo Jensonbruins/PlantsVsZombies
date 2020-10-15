@@ -4,7 +4,6 @@
 
 #ifndef PLANTSVSZOMBIES_PLANTBLUEPRINTS_H
 #define PLANTSVSZOMBIES_PLANTBLUEPRINTS_H
-#include "entityBlueprints.h"
 #include "sdl.h"
 
 typedef struct _gridBlock_ {
@@ -26,7 +25,7 @@ typedef struct _lane_ {
 } lane;
 
 typedef struct _plant_ {
-    entity components;
+    int health;
     int state;
     int delayCounter;
     // Max amount of frames (this if for blitting multiple types of zombies at a time)
@@ -44,7 +43,9 @@ typedef struct _plant_ {
 } plant;
 
 typedef struct _sun_ {
-    entity components;
+    int x;
+    int y;
+    int health;
     int counter;
     SDL_Texture *texture[2];
 } sun;

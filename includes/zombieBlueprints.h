@@ -4,10 +4,11 @@
 
 #ifndef PLANTSVSZOMBIES_ZOMBIEBLUEPRINTS_H
 #define PLANTSVSZOMBIES_ZOMBIEBLUEPRINTS_H
-#include "entityBlueprints.h"
 #include "sdl.h"
 typedef struct _zombie_ {
-    entity components;
+    int health;
+    int x;
+    int y;
     int state;
     int delayCounter;
     // Max amount of frames (this if for blitting multiple types of zombies at a time)
