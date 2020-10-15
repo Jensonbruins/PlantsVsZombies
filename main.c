@@ -41,9 +41,6 @@ int main(int argc, char *argv[]) {
             {block9, noPlant}
     };
 
-    printf("%d,%d\n", blockArray[0].x, blockArray[0].plantId);
-
-
     lane laneArray[5] = {
             { 120 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
             { 270 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
@@ -54,9 +51,9 @@ int main(int argc, char *argv[]) {
 
 
     laneArray[0].blockArray[0].plantId = 0;
-    laneArray[1].blockArray[0].plantId = 1;
+    laneArray[2].blockArray[1].plantId = 1;
 
-    printf("%d,%d\n", laneArray[0].blockArray[0].x, laneArray[0].blockArray[0].plantId);
+    printf("%d, %d, %d\n", laneArray[2].blockArray[1].x, laneArray[2].y, laneArray[2].blockArray[1].plantId);
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
     TTF_Font *font = TTF_OpenFont("gfx/hud/sun/arial.ttf", 28);

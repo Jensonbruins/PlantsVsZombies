@@ -19,6 +19,8 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 SDL_GetMouseState(&mouseX,&mouseY);
+
+                printf("%d,%d\n",mouseX, mouseY);
 //                handle_click(mouseX,mouseY);
                 break;
             case SDL_KEYDOWN:

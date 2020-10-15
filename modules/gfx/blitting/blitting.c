@@ -91,9 +91,8 @@ extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantAr
 //        printf("%d\n", y);
         for (int column = 0; column <= 8; column++) {
             int plantId = laneArray[row].blockArray[column].plantId;
-//            printf("%d\n", laneArray[row].blockArray[column].x);
             if (plantId > 45) {
-                break;
+                continue;
             }
 
             int x = laneArray[row].blockArray[column].x;
