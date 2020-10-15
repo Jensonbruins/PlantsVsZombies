@@ -30,22 +30,23 @@ extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTextu
     blit(renderer, backgroundTexture, 0, 0);
 }
 
-extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
-    if (zombie->components.health > 0) {
-        if (zombie->state == 0) {
-            blit(renderer, zombie->textureWalk[zombie->walkCounter], zombie->components.x, zombie->components.y);
+extern void draw_zombie(SDL_Renderer *renderer, zombie *object) {
+    if (object->components.health > 0) {
+        if (object->state == 0) {
+            blit(renderer, object->textureWalk[object->walkCounter], object->components.x, object->components.y);
 
-            zombie->delayCounter++;
+            object->delayCounter++;
 
-            if (zombie->delayCounter >= 5) {
-                zombie->walkCounter++;
-                zombie->delayCounter = 0;
+            if (object->delayCounter >= 5) {
+                object->walkCounter++;
+                object->delayCounter = 0;
             }
 
-            if (zombie->walkCounter >= zombie->amountWalkTexture) {
-                zombie->walkCounter = 0;
+            if (object->walkCounter >= object->amountWalkTexture) {
+                object->walkCounter = 0;
             }
         }
+    }
 //        if (zombie->state == 1) {
 //            blit(renderer, zombie->textureAttack[zombie->attackCounter], zombie->components.x, zombie->components.y);
 //
@@ -63,6 +64,24 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
 //        if (zombie->state == 2) {
 //
 //        }
+}
+
+extern void draw_plant(SDL_Renderer *renderer, plant *object) {
+    if (object->components.health > 0) {
+        if (object->state == 0) {
+            blit(renderer, object->textureIdle[object->idleCounter], object->components.x, object->components.y);
+
+            object->delayCounter++;
+
+            if (object->delayCounter >= 5) {
+                object->idleCounter++;
+                object->delayCounter = 0;
+            }
+
+            if (object->idleCounter >= object->amountIdleTexture) {
+                object->idleCounter = 0;
+            }
+        }
     }
 }
 

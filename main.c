@@ -13,11 +13,14 @@ int main(int argc, char *argv[]) {
 
     init_sdl();
 
-    sunGui sunGuiObject;
-    init_sun_hud(renderer, &sunGuiObject);
+    sunGui sunHudObject;
+    init_sun_hud(renderer, &sunHudObject);
 
-    zombie test;
-    init_zombie(renderer, &test);
+    zombie zombieObject;
+    init_zombie(renderer, &zombieObject);
+
+    plant plantObject;
+    init_plant(renderer, &plantObject);
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
     TTF_Font *font = TTF_OpenFont("gfx/hud/sun/arial.ttf", 28);
@@ -31,9 +34,11 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
-        draw_sun_gui(renderer, &sunGuiObject, font);
-        draw_zombie(renderer, &test);
-        move_zombie(&test);
+        draw_sun_gui(renderer, &sunHudObject, font);
+        draw_zombie(renderer, &zombieObject);
+        move_zombie(&zombieObject);
+
+        draw_plant(renderer, &plantObject);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic
