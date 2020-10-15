@@ -9,7 +9,7 @@
 typedef struct _zombie_ {
     entity components;
     int state;
-    int slowDownCounter;
+    int delayCounter;
     // Max amount of frames (this if for blitting multiple types of zombies at a time)
     int amountWalkTexture;
     int amountAttackTexture;

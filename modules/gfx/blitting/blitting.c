@@ -35,11 +35,11 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie) {
         if (zombie->state == 0) {
             blit(renderer, zombie->textureWalk[zombie->walkCounter], zombie->components.x, zombie->components.y);
 
-            zombie->slowDownCounter++;
+            zombie->delayCounter++;
 
-            if (zombie->slowDownCounter >= 5) {
+            if (zombie->delayCounter >= 5) {
                 zombie->walkCounter++;
-                zombie->slowDownCounter = 0;
+                zombie->delayCounter = 0;
             }
 
             if (zombie->walkCounter >= zombie->amountWalkTexture) {

@@ -11,7 +11,7 @@ extern void init_zombie(SDL_Renderer *renderer, zombie *zombie) {
     zombie->components.priority = 0;
     zombie->state = 0;
     // Counters to keep track of everything
-    zombie->slowDownCounter = 0;
+    zombie->delayCounter = 0;
     zombie->walkCounter = 0;
     zombie->attackCounter = 0;
     zombie->dieCounter = 0;
@@ -27,7 +27,7 @@ extern void init_zombie(SDL_Renderer *renderer, zombie *zombie) {
 }
 
 extern void move_zombie(zombie *zombie) {
-    if (zombie->slowDownCounter >= 4) {
+    if (zombie->delayCounter >= 4) {
         if (zombie->components.x >= 250) {
             zombie->components.x = zombie->components.x - 2;
         }
