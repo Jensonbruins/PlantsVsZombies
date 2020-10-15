@@ -78,6 +78,11 @@ extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object) {
         object->delayCounter = 0;
     }
 
+    SDL_Rect outerBox = {402, 8, 160, 44};
+    SDL_SetRenderDrawColor(renderer, 113, 80, 8, 255);           // Background color
+    SDL_RenderFillRect(renderer, &outerBox);
+    SDL_Rect innerBox = {450, 12, 108, 36};
+    SDL_SetRenderDrawColor(renderer, 230, 214, 157, 255);           // Background color
+    SDL_RenderFillRect(renderer, &innerBox);
     blit(renderer, object->texture[object->counter], 400, 5);
-
 }

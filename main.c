@@ -30,7 +30,6 @@ int main(int argc, char *argv[]) {
     while (1) {
         firstFrame = SDL_GetTicks();                                    // Frame cap logic
         process_input(window, renderer);                                // Process key input and mouse input
-        SDL_SetRenderDrawColor(renderer, 120, 144, 156, 255);           // Background color
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
