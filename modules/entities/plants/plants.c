@@ -26,3 +26,10 @@ extern void init_top_bar(SDL_Renderer *renderer, topBar *object) {
     object->counter = 0;
     texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture * *) & object->texture);
 }
+
+extern void init_side_bar(SDL_Renderer *renderer, sideBar *object) {
+    object->selection = 0;
+    object->amountTextures = 2;
+    object->texture[0] = texture_loader(renderer, "gfx/hud/sidebar/peashooterseed.png");
+    object->texture[1] = texture_loader(renderer, "gfx/hud/sidebar/sunflowerseed.png");
+}

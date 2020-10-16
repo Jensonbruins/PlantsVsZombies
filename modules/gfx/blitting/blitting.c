@@ -101,7 +101,7 @@ extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantAr
     }
 }
 
-extern void draw_sun_gui(SDL_Renderer *renderer, topBar *object, TTF_Font *font) {
+extern void draw_topbar(SDL_Renderer *renderer, topBar *object, TTF_Font *font) {
 
     object->delayCounter++;
     if (object->delayCounter >= 10) {
@@ -135,4 +135,13 @@ extern void draw_sun_gui(SDL_Renderer *renderer, topBar *object, TTF_Font *font)
     SDL_FreeSurface(surface);
 
     blit(renderer, object->texture[object->counter], 400, 5);
+}
+
+extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object) {
+    int y = 50;
+    int x = 50;
+    for (int k = 0; k < object->amountTextures; k++) {
+        blit(renderer, object->texture[k], x, y);
+        y = y + 70;
+    }
 }

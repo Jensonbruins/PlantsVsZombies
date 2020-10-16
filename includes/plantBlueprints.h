@@ -50,9 +50,8 @@ typedef struct _topBar_ {
 } topBar;
 
 typedef struct _sideBar_ {
-    int amount;
-    int delayCounter;
-    int counter;
-    SDL_Texture *texture[2];
+    int selection;
+    int amountTextures;
+    SDL_Texture *texture[10];
 } sideBar;
 #endif //PLANTSVSZOMBIES_PLANTBLUEPRINTS_H

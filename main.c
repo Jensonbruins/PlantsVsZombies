@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     init_top_bar(renderer, &topBarObject);
 
     sideBar sideBarObject;
-//    init_side_bar(renderer, &sideBarObject);
+    init_side_bar(renderer, &sideBarObject);
 
     zombie zombieObject;
     init_zombie(renderer, &zombieObject);
@@ -63,7 +63,8 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
-        draw_sun_gui(renderer, &topBarObject, font);
+        draw_topbar(renderer, &topBarObject, font);
+        draw_sidebar(renderer, &sideBarObject);
         draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
         draw_zombie(renderer, &zombieObject);
         move_zombie(&zombieObject);
