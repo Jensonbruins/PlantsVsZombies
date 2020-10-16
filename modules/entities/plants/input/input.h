@@ -5,5 +5,7 @@
 #ifndef PLANTSVSZOMBIES_INPUT_H
 #define PLANTSVSZOMBIES_INPUT_H
 #include "../../../../includes/sdl.h"
-extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font);
+#include "../../../../includes/plantBlueprints.h"
+#include "../plants.h"
+extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantArray[45]);
 #endif //PLANTSVSZOMBIES_INPUT_H

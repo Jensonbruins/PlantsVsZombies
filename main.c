@@ -19,12 +19,13 @@ int main(int argc, char *argv[]) {
     zombie zombieObject;
     init_zombie(renderer, &zombieObject);
 
-    plant plantObject;
-    init_plant(renderer, &plantObject);
+//    debug object
+//    plant plantObject;
+//    init_plant(renderer, &plantObject);
 
     plant plantObjects[45];
-    init_plant(renderer, &plantObjects[0]);
-    init_plant(renderer, &plantObjects[1]);
+//    init_plant(renderer, &plantObjects[0]);
+//    init_plant(renderer, &plantObjects[1]);
 
     int noPlant = 50;
     int block1 = 410; int block2 = 540; int block3 = 670; int block4 = 800; int block5 = 920; int block6 = 1050; int block7 = 1170; int block8 = 1300; int block9 = 1430;
@@ -50,10 +51,9 @@ int main(int argc, char *argv[]) {
     };
 
 
-    laneArray[0].blockArray[0].plantId = 0;
-    laneArray[2].blockArray[1].plantId = 1;
+//    laneArray[0].blockArray[0].plantId = 0;
+//    laneArray[1].blockArray[0].plantId = 1;
 
-    printf("%d, %d, %d\n", laneArray[2].blockArray[1].x, laneArray[2].y, laneArray[2].blockArray[1].plantId);
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
     TTF_Font *font = TTF_OpenFont("gfx/hud/sun/arial.ttf", 28);
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
     unsigned int frameTime;
     while (1) {
         firstFrame = SDL_GetTicks();                                    // Frame cap logic
-        process_input(window, renderer, font);                          // Process key input and mouse input
+        process_input(window, renderer, font, (lane*) &laneArray,(plant*) &plantObjects);                          // Process key input and mouse input
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
@@ -71,7 +71,6 @@ int main(int argc, char *argv[]) {
         draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
         draw_zombie(renderer, &zombieObject);
         move_zombie(&zombieObject);
-
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic

@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -std=c99 -Wall -Wextra -Wconversion -Wpedantic `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_mixer -lSDL2_ttf -Iincludes -Imodules
 OBJECTS = objects
 
-all: clean filesystem.o gfx sfx.o entities move
+all: clean filesystem.o gfx input.o sfx.o entities move
 	$(CC) -o PlantsVsZombies main.c $(CFLAGS) $(OBJECTS)/blitting.o $(OBJECTS)/collision-detection.o $(OBJECTS)/filesystem.o $(OBJECTS)/input.o $(OBJECTS)/plants.o $(OBJECTS)/sfx.o $(OBJECTS)/timing.o $(OBJECTS)/zombies.o -lm
 
 blitting.o:
@@ -22,13 +22,13 @@ filesystem.o:
 
 gfx: blitting.o timing.o
 
-input.o:
+input.o: plants.o
 	$(CC) $(CFLAGS) -c modules/entities/plants/input/input.c
 
 move:
 	mv *.o $(OBJECTS)
 
-plants.o: input.o filesystem.o
+plants.o: filesystem.o
 	$(CC) $(CFLAGS) -c modules/entities/plants/plants.c
 
 sfx.o:
