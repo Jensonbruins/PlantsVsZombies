@@ -22,7 +22,7 @@ extern void init_plant(SDL_Renderer *renderer, plant *object) {
 
 extern void init_top_bar(SDL_Renderer *renderer, topBar *object) {
     object->delayCounter = 0;
-    object->amount = 1000;
+    object->amount = 25;
     object->counter = 0;
     texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture * *) & object->texture);
 }

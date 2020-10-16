@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
 
         draw_background(renderer, backgroundTexture);                   // Set background
         draw_topbar(renderer, &topBarObject, font);
-        draw_sidebar(renderer, &sideBarObject);
+        draw_sidebar(renderer, &sideBarObject, &topBarObject);
         draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
         draw_zombie(renderer, &zombieObject);
         move_zombie(&zombieObject);

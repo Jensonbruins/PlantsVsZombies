@@ -5,6 +5,7 @@
 #include "blitting.h"
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y);
+static void helper_sidebar(SDL_Renderer *renderer, int x, int y, int color);
 //static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle);
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y) {
@@ -137,11 +138,50 @@ extern void draw_topbar(SDL_Renderer *renderer, topBar *object, TTF_Font *font) 
     blit(renderer, object->texture[object->counter], 400, 5);
 }
 
-extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object) {
+extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object, topBar *topBarObject) {
     int y = 50;
     int x = 50;
-    for (int k = 0; k < object->amountTextures; k++) {
-        blit(renderer, object->texture[k], x, y);
-        y = y + 70;
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+    blit(renderer, object->texture[0], x, y); // PeashooterSeed
+    if (topBarObject->amount < 100) {
+        helper_sidebar(renderer, x, y, 0);
+        object->selection = 0;
+    }
+
+    y = y + 70;
+
+    blit(renderer, object->texture[1], x, y); // SunFlowerSeed
+    if (topBarObject->amount < 50) {
+        helper_sidebar(renderer, x, y, 0);
+        object->selection = 0;
+    }
+}
+
+static void helper_sidebar(SDL_Renderer *renderer, int x, int y, int color) {
+    if (color == 0) {
+        SDL_SetRenderDrawColor(renderer, 105,105,105, 160);
+        SDL_Rect insufficientFunds = {x, y, 107, 66};
+        SDL_RenderFillRect(renderer, &insufficientFunds);
+    } else {
+        SDL_SetRenderDrawColor(renderer, 255,0,0, 255);
+        SDL_Rect topToRight = {x, y+3, 20, 6};
+        SDL_Rect topToLeft = {x+84, y+3, 20, 6};
+        SDL_Rect topLeftToBottom = {x, y+3, 6, 20};
+        SDL_Rect topRightToBottom = {x+100, y+3, 6, 20};
+        SDL_Rect bottomLeftToTop = {x, y+46, 6, 20};
+        SDL_Rect bottomRightToTop = {x+100, y+46, 6, 20};
+        SDL_Rect bottomToRight = {x, y + 60, 20, 6};
+        SDL_Rect bottomToLeft = {x + 84, y + 60, 20, 6};
+        SDL_RenderFillRect(renderer, &topToRight);
+        SDL_RenderFillRect(renderer, &topToLeft);
+        SDL_RenderFillRect(renderer, &topLeftToBottom);
+        SDL_RenderFillRect(renderer, &topRightToBottom);
+        SDL_RenderFillRect(renderer, &bottomLeftToTop);
+        SDL_RenderFillRect(renderer, &bottomRightToTop);
+        SDL_RenderFillRect(renderer, &bottomToRight);
+        SDL_RenderFillRect(renderer, &bottomToLeft);
+
     }
 }

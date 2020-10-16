@@ -115,6 +115,7 @@ static int handle_click_helper(int x) {
     } else if (x > grid9start && x < grid9stop) {
         return 8;
     }
+    return 9;
 }
 
 static void proper_shutdown(SDL_Renderer *renderer, SDL_Window *window, TTF_Font *font) {
