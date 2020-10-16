@@ -101,7 +101,7 @@ extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantAr
     }
 }
 
-extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object, TTF_Font *font) {
+extern void draw_sun_gui(SDL_Renderer *renderer, topBar *object, TTF_Font *font) {
 
     object->delayCounter++;
     if (object->delayCounter >= 10) {

@@ -42,10 +42,17 @@ typedef struct _sun_ {
     SDL_Texture *texture[2];
 } sun;
 
-typedef struct _sunGui_ {
+typedef struct _topBar_ {
     int amount;
     int delayCounter;
     int counter;
     SDL_Texture *texture[2];
-} sunGui;
+} topBar;
+
+typedef struct _sideBar_ {
+    int amount;
+    int delayCounter;
+    int counter;
+    SDL_Texture *texture[2];
+} sideBar;
 #endif //PLANTSVSZOMBIES_PLANTBLUEPRINTS_H

@@ -6,6 +6,6 @@
 #define PLANTSVSZOMBIES_PLANTS_H
 #include "../../../includes/plantBlueprints.h"
 #include "../../filesystem/filesystem.h"
-extern void init_plant(SDL_Renderer *renderer, plant *plant);
-extern void init_sun_hud(SDL_Renderer *renderer, sunGui *sunGuiObject);
+extern void init_plant(SDL_Renderer *renderer, plant *object);
+extern void init_top_bar(SDL_Renderer *renderer, topBar *object);
 #endif //PLANTSVSZOMBIES_PLANTS_H

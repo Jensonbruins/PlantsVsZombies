@@ -4,25 +4,25 @@
 
 #include "plants.h"
 
-extern void init_plant(SDL_Renderer *renderer, plant *plant) {
-    plant->health = 4;
-    plant->state = 0;
+extern void init_plant(SDL_Renderer *renderer, plant *object) {
+    object->health = 4;
+    object->state = 0;
     // Counters to keep track of everything
-    plant->delayCounter = 0;
-    plant->idleCounter = 0;
-    plant->attackCounter = 0;
-    plant->dieCounter = 0;
+    object->delayCounter = 0;
+    object->idleCounter = 0;
+    object->attackCounter = 0;
+    object->dieCounter = 0;
     // Die texture
-    plant->amountIdleTexture = 13;
-    plant->amountAttackTexture = 0;
-    plant->amountDieTexture = 0;
-    texture_initializer(renderer, "gfx/plant/peashooter/", "idle_", plant->amountIdleTexture,
-                        (SDL_Texture * *) & plant->textureIdle);
+    object->amountIdleTexture = 13;
+    object->amountAttackTexture = 0;
+    object->amountDieTexture = 0;
+    texture_initializer(renderer, "gfx/plant/peashooter/", "idle_", object->amountIdleTexture,
+                        (SDL_Texture * *) & object->textureIdle);
 }
 
-extern void init_sun_hud(SDL_Renderer *renderer, sunGui *sunGuiObject) {
-    sunGuiObject->delayCounter = 0;
-    sunGuiObject->amount = 1000;
-    sunGuiObject->counter = 0;
-    texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture * *) & sunGuiObject->texture);
+extern void init_top_bar(SDL_Renderer *renderer, topBar *object) {
+    object->delayCounter = 0;
+    object->amount = 1000;
+    object->counter = 0;
+    texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture * *) & object->texture);
 }

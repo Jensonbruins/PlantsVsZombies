@@ -13,8 +13,11 @@ int main(int argc, char *argv[]) {
 
     init_sdl();
 
-    sunGui sunHudObject;
-    init_sun_hud(renderer, &sunHudObject);
+    topBar topBarObject;
+    init_top_bar(renderer, &topBarObject);
+
+    sideBar sideBarObject;
+//    init_side_bar(renderer, &sideBarObject);
 
     zombie zombieObject;
     init_zombie(renderer, &zombieObject);
@@ -24,8 +27,6 @@ int main(int argc, char *argv[]) {
 //    init_plant(renderer, &plantObject);
 
     plant plantObjects[45];
-//    init_plant(renderer, &plantObjects[0]);
-//    init_plant(renderer, &plantObjects[1]);
 
     int noPlant = 50;
     int block1 = 410; int block2 = 540; int block3 = 670; int block4 = 800; int block5 = 920; int block6 = 1050; int block7 = 1170; int block8 = 1300; int block9 = 1430;
@@ -50,11 +51,6 @@ int main(int argc, char *argv[]) {
             { 700 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}}
     };
 
-
-//    laneArray[0].blockArray[0].plantId = 0;
-//    laneArray[1].blockArray[0].plantId = 1;
-
-
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
     TTF_Font *font = TTF_OpenFont("gfx/hud/sun/arial.ttf", 28);
 
@@ -67,7 +63,7 @@ int main(int argc, char *argv[]) {
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
-        draw_sun_gui(renderer, &sunHudObject, font);
+        draw_sun_gui(renderer, &topBarObject, font);
         draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
         draw_zombie(renderer, &zombieObject);
         move_zombie(&zombieObject);

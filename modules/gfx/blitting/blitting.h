@@ -10,5 +10,5 @@ extern void draw_background(SDL_Renderer *renderer, SDL_Texture *txtr);
 extern void draw_zombie(SDL_Renderer *renderer, zombie *zombie);
 extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y);
 extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant objects[45]);
-extern void draw_sun_gui(SDL_Renderer *renderer, sunGui *object, TTF_Font *font);
+extern void draw_sun_gui(SDL_Renderer *renderer, topBar *object, TTF_Font *font);
 #endif //PLANTSVSZOMBIES_BLITTING_H
