@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c99 -Wall -Wextra -Wconversion -Wpedantic `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_mixer -lSDL2_ttf -Iincludes -Imodules
+CFLAGS = -std=c99 -Wall -Wextra -Wconversion -Wpedantic `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_mixer -lSDL2_ttf
 OBJECTS = objects
 
 all: clean filesystem.o gfx input.o sfx.o entities move
