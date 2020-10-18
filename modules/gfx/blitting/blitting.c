@@ -34,8 +34,27 @@ extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTextu
 
 extern void draw_zombie(SDL_Renderer *renderer, zombie *object) {
     if (object->health > 0) {
+        int y;
+        switch(object->lane) {
+            case(0):
+                y = 50;
+                break;
+            case(1):
+                y = 200;
+                break;
+            case(2):
+                y = 360;
+                break;
+            case(3):
+                y = 470;
+                break;
+            case(4):
+                y = 640;
+                break;
+        }
         if (object->state == 0) {
-            blit(renderer, object->textureWalk[object->walkCounter], object->x, object->y);
+
+            blit(renderer, object->textureWalk[object->walkCounter], object->x, y);
 
             object->delayCounter++;
 

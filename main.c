@@ -19,8 +19,13 @@ int main(int argc, char *argv[]) {
     sideBar sideBarObject;
     init_side_bar(renderer, &sideBarObject);
 
-    zombie zombieObject;
-    init_zombie(renderer, &zombieObject);
+    zombie zombieObjects[40];
+    init_zombies(renderer, &zombieObjects[0], 0, 1500, 2);
+    init_zombies(renderer, &zombieObjects[1], 1, 1600, 2);
+    init_zombies(renderer, &zombieObjects[2], 2, 1600, 2);
+
+
+//    init_zombie(renderer, &zombieObject);
 
 //    debug object
 //    plant plantObject;
@@ -66,8 +71,12 @@ int main(int argc, char *argv[]) {
         draw_topbar(renderer, &topBarObject, font);
         draw_sidebar(renderer, &sideBarObject, &topBarObject);
         draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
-        draw_zombie(renderer, &zombieObject);
-        move_zombie(&zombieObject);
+        draw_zombie(renderer, &zombieObjects[0]);
+        move_zombie(&zombieObjects[0]);
+        draw_zombie(renderer, &zombieObjects[1]);
+        move_zombie(&zombieObjects[1]);
+        draw_zombie(renderer, &zombieObjects[2]);
+        move_zombie(&zombieObjects[2]);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic

@@ -8,7 +8,7 @@
 typedef struct _zombie_ {
     int health;
     int x;
-    int y;
+    int lane;
     int state;
     int delayCounter;
     // Max amount of frames (this if for blitting multiple types of zombies at a time)
