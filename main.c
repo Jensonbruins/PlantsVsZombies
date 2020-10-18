@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     unsigned int frameTime;
     while (1) {
         firstFrame = SDL_GetTicks();                                    // Frame cap logic
-        process_input(window, renderer, font, (lane*) &laneArray,(plant*) &plantObjects);                          // Process key input and mouse input
+        process_input(window, renderer, font, (lane*) &laneArray,(plant*) &plantObjects, &sideBarObject);                          // Process key input and mouse input
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background

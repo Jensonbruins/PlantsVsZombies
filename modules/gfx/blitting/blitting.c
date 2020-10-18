@@ -5,6 +5,7 @@
 #include "blitting.h"
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y);
+static void helper_sidebar_item(SDL_Renderer *renderer, sideBar *object, int amount, int x, int y, int cost, int item);
 static void helper_sidebar(SDL_Renderer *renderer, int x, int y, int color);
 //static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle);
 
@@ -145,17 +146,20 @@ extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object, topBar *topBar
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     blit(renderer, object->texture[0], x, y); // PeashooterSeed
-    if (topBarObject->amount < 100) {
-        helper_sidebar(renderer, x, y, 0);
-        object->selection = 0;
-    }
+    helper_sidebar_item(renderer, object, topBarObject->amount, x, y, 100, 1);
 
     y = y + 70;
 
     blit(renderer, object->texture[1], x, y); // SunFlowerSeed
-    if (topBarObject->amount < 50) {
+    helper_sidebar_item(renderer, object, topBarObject->amount, x, y, 50, 2);
+}
+
+static void helper_sidebar_item(SDL_Renderer *renderer,sideBar *object, int amount, int x, int y, int cost, int item) {
+    if (amount < cost) {
         helper_sidebar(renderer, x, y, 0);
         object->selection = 0;
+    } else if (object->selection == item) {
+        helper_sidebar(renderer, x, y, 1);
     }
 }
 

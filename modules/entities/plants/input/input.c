@@ -4,10 +4,10 @@
 
 #include "input.h"
 static void proper_shutdown(SDL_Renderer *renderer, SDL_Window *window, TTF_Font *font);
-static void handle_click(int x, int y,SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45]);
+static void handle_click(int x, int y,SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject);
 static int handle_click_helper(int x);
 
-extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45]) {
+extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject) {
     SDL_Event event;
     int mouseX;
     int mouseY;
@@ -21,7 +21,7 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 SDL_GetMouseState(&mouseX,&mouseY);
-                handle_click(mouseX,mouseY,renderer, laneArray,plantObjects);
+                handle_click(mouseX,mouseY,renderer, laneArray,plantObjects, sideBarObject);
                 break;
             case SDL_KEYDOWN:
                 if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -35,7 +35,7 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
     }
 }
 
-static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5], plant plantObjects[45]) {
+static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject) {
     int lane1start = 120;
     int lane2start = 238;
     int lane3start = 380;
@@ -45,6 +45,22 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
 
     int grid1start = 392;
     int grid9stop = 1529;
+
+//    printf("%d,%d", x, y);
+    int sideBarStart = 50;
+
+    for (int k = 1; k < 3; k++) {
+        if (x > 50 && x < 107) {
+            if (y > sideBarStart && y < (sideBarStart + 66)) {
+                if (sideBarObject->selection == k) {
+                    sideBarObject->selection = 0;
+                } else {
+                    sideBarObject->selection = k;
+                }
+            }
+        }
+        sideBarStart = sideBarStart + 70;
+    }
 
     if (y > lane1start && y < lane2start) {
         if (x > grid1start && x < grid9stop) {
