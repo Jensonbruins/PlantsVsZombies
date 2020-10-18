@@ -62,40 +62,42 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
         sideBarStart = sideBarStart + 70;
     }
 
-    if (y > lane1start && y < lane2start) {
-        if (x > grid1start && x < grid9stop) {
-            int helper_id = handle_click_helper(x);
-            int id = 0 + helper_id;
-            laneArray[0].blockArray[helper_id].plantId = id;
-            init_plant(renderer, &plantObjects[id]);
-        }
-    } else if (y > lane2start && y < lane3start) {
-        if (x > grid1start && x < grid9stop) {
-            int helper_id = handle_click_helper(x);
-            int id = 9 + helper_id;
-            laneArray[1].blockArray[helper_id].plantId = id;
-            init_plant(renderer, &plantObjects[id]);
-        }
-    } else if (y > lane3start && y < lane4start) {
-        if (x > grid1start && x < grid9stop) {
-            int helper_id = handle_click_helper(x);
-            int id = 18 + helper_id;
-            laneArray[2].blockArray[helper_id].plantId = id;
-            init_plant(renderer, &plantObjects[id]);
-        }
-    } else if (y > lane4start && y < lane5start) {
-        if (x > grid1start && x < grid9stop) {
-            int helper_id = handle_click_helper(x);
-            int id = 27 + helper_id;
-            laneArray[3].blockArray[helper_id].plantId = id;
-            init_plant(renderer, &plantObjects[id]);
-        }
-    } else if (y > lane5start && y < lane5stop) {
-        if (x > grid1start && x < grid9stop) {
-            int helper_id = handle_click_helper(x);
-            int id = 36 + helper_id;
-            laneArray[4].blockArray[helper_id].plantId = id;
-            init_plant(renderer, &plantObjects[id]);
+    if (sideBarObject->selection != 0) {
+        if (y > lane1start && y < lane2start) {
+            if (x > grid1start && x < grid9stop) {
+                int helper_id = handle_click_helper(x);
+                int id = 0 + helper_id;
+                laneArray[0].blockArray[helper_id].plantId = id;
+                init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+            }
+        } else if (y > lane2start && y < lane3start) {
+            if (x > grid1start && x < grid9stop) {
+                int helper_id = handle_click_helper(x);
+                int id = 9 + helper_id;
+                laneArray[1].blockArray[helper_id].plantId = id;
+                init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+            }
+        } else if (y > lane3start && y < lane4start) {
+            if (x > grid1start && x < grid9stop) {
+                int helper_id = handle_click_helper(x);
+                int id = 18 + helper_id;
+                laneArray[2].blockArray[helper_id].plantId = id;
+                init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+            }
+        } else if (y > lane4start && y < lane5start) {
+            if (x > grid1start && x < grid9stop) {
+                int helper_id = handle_click_helper(x);
+                int id = 27 + helper_id;
+                laneArray[3].blockArray[helper_id].plantId = id;
+                init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+            }
+        } else if (y > lane5start && y < lane5stop) {
+            if (x > grid1start && x < grid9stop) {
+                int helper_id = handle_click_helper(x);
+                int id = 36 + helper_id;
+                laneArray[4].blockArray[helper_id].plantId = id;
+                init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+            }
         }
     }
 }
