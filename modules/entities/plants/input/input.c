@@ -4,10 +4,10 @@
 
 #include "input.h"
 static void proper_shutdown(SDL_Renderer *renderer, SDL_Window *window, TTF_Font *font);
-static void handle_click(int x, int y,SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject);
+static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject);
 static int handle_click_helper(int x);
 
-extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject) {
+extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject) {
     SDL_Event event;
     int mouseX;
     int mouseY;
@@ -21,7 +21,7 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 SDL_GetMouseState(&mouseX,&mouseY);
-                handle_click(mouseX,mouseY,renderer, laneArray,plantObjects, sideBarObject);
+                handle_click(mouseX,mouseY,renderer, laneArray,plantObjects, sideBarObject, topBarObject);
                 break;
             case SDL_KEYDOWN:
                 if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -35,7 +35,7 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
     }
 }
 
-static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject) {
+static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject) {
     int lane1start = 120;
     int lane2start = 238;
     int lane3start = 380;
@@ -63,11 +63,22 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
     }
 
     if (sideBarObject->selection != 0) {
+        int cost;
+        switch (sideBarObject->selection) {
+            case 1:
+                cost = 100;
+                break;
+            case 2:
+                cost = 50;
+                break;
+        }
+
         if (y > lane1start && y < lane2start) {
             if (x > grid1start && x < grid9stop) {
                 int helper_id = handle_click_helper(x);
                 int id = 0 + helper_id;
                 laneArray[0].blockArray[helper_id].plantId = id;
+                topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
             }
         } else if (y > lane2start && y < lane3start) {
@@ -75,6 +86,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 int helper_id = handle_click_helper(x);
                 int id = 9 + helper_id;
                 laneArray[1].blockArray[helper_id].plantId = id;
+                topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
             }
         } else if (y > lane3start && y < lane4start) {
@@ -82,6 +94,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 int helper_id = handle_click_helper(x);
                 int id = 18 + helper_id;
                 laneArray[2].blockArray[helper_id].plantId = id;
+                topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
             }
         } else if (y > lane4start && y < lane5start) {
@@ -89,6 +102,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 int helper_id = handle_click_helper(x);
                 int id = 27 + helper_id;
                 laneArray[3].blockArray[helper_id].plantId = id;
+                topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
             }
         } else if (y > lane5start && y < lane5stop) {
@@ -96,6 +110,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 int helper_id = handle_click_helper(x);
                 int id = 36 + helper_id;
                 laneArray[4].blockArray[helper_id].plantId = id;
+                topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
             }
         }
