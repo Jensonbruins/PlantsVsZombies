@@ -157,7 +157,9 @@ extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object, topBar *topBar
 static void helper_sidebar_item(SDL_Renderer *renderer,sideBar *object, int amount, int x, int y, int cost, int item) {
     if (amount < cost) {
         helper_sidebar(renderer, x, y, 0);
-        object->selection = 0;
+        if (object->selection == item) {
+            object->selection = 0;
+        }
     } else if (object->selection == item) {
         helper_sidebar(renderer, x, y, 1);
     }
