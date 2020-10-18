@@ -29,6 +29,7 @@ typedef struct _plant_ {
     int attackCounter;
     int dieCounter;
     // Storing the animation preserve 30 cuz thats the max animations of the biggest object ;)
+    int lastShot;
     SDL_Texture *textureIdle[30];
     SDL_Texture *textureAttack[30];
     SDL_Texture *textureDie[30];

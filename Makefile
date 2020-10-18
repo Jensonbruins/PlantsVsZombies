@@ -23,7 +23,7 @@ filesystem.o:
 gfx: blitting.o timing.o
 
 input.o: plants.o
-	$(CC) $(CFLAGS) -c modules/entities/plants/input/input.c
+	$(CC) $(CFLAGS) -c modules/input/input.c
 
 move:
 	mv *.o $(OBJECTS)
