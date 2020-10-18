@@ -20,16 +20,14 @@ int main(int argc, char *argv[]) {
     init_side_bar(renderer, &sideBarObject);
 
     zombie zombieObjects[40];
-    init_zombies(renderer, &zombieObjects[0], 0, 1500, 2);
-    init_zombies(renderer, &zombieObjects[1], 1, 1600, 2);
-    init_zombies(renderer, &zombieObjects[2], 2, 1600, 2);
-
-
-//    init_zombie(renderer, &zombieObject);
-
-//    debug object
-//    plant plantObject;
-//    init_plant(renderer, &plantObject);
+    int amountOfZombies = 4;
+    int zombieArray[20][3] = {
+            {0, 1500, 2},
+            {0, 1800, 2},
+            {1, 1500, 2},
+            {3, 1600, 2}
+    };
+    init_zombies(renderer, (zombie *) &zombieObjects, zombieArray, amountOfZombies);
 
     plant plantObjects[45];
 
@@ -70,13 +68,11 @@ int main(int argc, char *argv[]) {
         draw_background(renderer, backgroundTexture);                   // Set background
         draw_topbar(renderer, &topBarObject, font);
         draw_sidebar(renderer, &sideBarObject, &topBarObject);
+
         draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
-        draw_zombie(renderer, &zombieObjects[0]);
-        move_zombie(&zombieObjects[0]);
-        draw_zombie(renderer, &zombieObjects[1]);
-        move_zombie(&zombieObjects[1]);
-        draw_zombie(renderer, &zombieObjects[2]);
-        move_zombie(&zombieObjects[2]);
+
+//        draw_zombie(renderer, (zombie *) &zombieObjects);
+//        move_zombie((zombie *) &zombieObjects);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic

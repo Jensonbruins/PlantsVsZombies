@@ -6,14 +6,16 @@
 static void init_standard_zombie(SDL_Renderer *renderer, zombie *zombie, int lane, int x);
 static void init_cone_zombie(SDL_Renderer *renderer, zombie *zombie, int lane, int x);
 
-extern void init_zombies(SDL_Renderer *renderer, zombie *object, int lane, int x, int zombie) {
-    switch (zombie) {
-        case(1):
-            init_standard_zombie(renderer, object, lane, x);
-            break;
-        case(2):
-            init_cone_zombie(renderer, object, lane, x);
-            break;
+extern void init_zombies(SDL_Renderer *renderer, zombie objects[40], int array[][3], int amount) {
+    for (int k = 0; k < amount; k++) {
+        switch (array[k][2]) {
+            case(1):
+                init_standard_zombie(renderer, &objects[k], array[k][0], array[k][1]);
+                break;
+            case(2):
+                init_cone_zombie(renderer, &objects[k], array[k][0], array[k][1]);
+                break;
+        }
     }
 }
 
@@ -55,8 +57,6 @@ static void init_cone_zombie(SDL_Renderer *renderer, zombie *zombie, int lane, i
                         (SDL_Texture * *) & zombie->textureWalk);
     texture_initializer(renderer, "gfx/zombie/cone/", "attack_", zombie->amountAttackTexture,
                         (SDL_Texture * *) & zombie->textureAttack);
-    printf("%d\n", zombie->lane);
-
 }
 
 extern void init_debug_zombie(SDL_Renderer *renderer, zombie *zombie) {
