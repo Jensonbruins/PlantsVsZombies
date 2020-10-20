@@ -126,6 +126,14 @@ extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantAr
     }
 }
 
+extern void draw_projectile(SDL_Renderer *renderer ,projectile object[50]) {
+    for (int k = 0; k < 50; k++) {
+        if (object[k].alive > 0) {
+            blit(renderer, object[k].texture, object[k].x, object[k].y);
+        }
+    }
+}
+
 extern void draw_topbar(SDL_Renderer *renderer, topBar *object, TTF_Font *font) {
 
     object->delayCounter++;

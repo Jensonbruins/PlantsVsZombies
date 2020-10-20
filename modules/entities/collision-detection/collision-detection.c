@@ -96,5 +96,18 @@ static void in_range_helper(zombie *zombieObject, lane *laneObject, plant plantA
             }
         }
     }
-    printf("%d\n", plantArray[3].state);
+}
+
+extern void projectile_check_hit(zombie zombieObjects[40], projectile projectileObjects[50]) {
+    for (int k = 0; k < 50; k++) {
+        if (projectileObjects[k].alive > 0) {
+            for (int n = 0; n < 40; n ++) {
+                if (zombieObjects[n].lane == projectileObjects[k].lane) {
+                    if (zombieObjects[n].x <= projectileObjects[k].x) {
+                        projectileObjects[k].alive = 0;
+                    }
+                }
+            }
+        }
+    }
 }

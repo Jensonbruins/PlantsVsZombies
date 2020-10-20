@@ -20,13 +20,15 @@ int main(int argc, char *argv[]) {
     init_side_bar(renderer, &sideBarObject);
 
     zombie zombieObjects[40];
-    int amountOfZombies = 1;
+    int amountOfZombies = 2;
     int zombieArray[40][3] = {
-            {0, 1800, 2}
+            {0, 1600, 2},
+            {1, 1600, 2}
     };
     init_zombies(renderer, (zombie *) &zombieObjects, zombieArray, amountOfZombies);
 
     plant plantObjects[45];
+    projectile projectileObjects[50];
 
     int noPlant = 50;
     int block1 = 410; int block2 = 540; int block3 = 670; int block4 = 800; int block5 = 920; int block6 = 1050; int block7 = 1170; int block8 = 1300; int block9 = 1430;
@@ -66,6 +68,8 @@ int main(int argc, char *argv[]) {
         draw_topbar(renderer, &topBarObject, font);
         draw_sidebar(renderer, &sideBarObject, &topBarObject);
 
+        draw_projectile(renderer,(projectile *) &projectileObjects);
+
         draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
 
         draw_zombie(renderer, (zombie *) &zombieObjects, amountOfZombies);
@@ -73,6 +77,11 @@ int main(int argc, char *argv[]) {
 
         zombie_check_collision((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant*) &plantObjects);
         zombie_check_in_range((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant*) &plantObjects);
+        plant_check_state(renderer,(plant*) &plantObjects, (lane *) &laneArray, (projectile *) &projectileObjects);
+
+        move_projectile((projectile *) &projectileObjects);
+
+//        projectile_check_hit((zombie *) &zombieObjects, (projectile *) &projectileObjects);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic

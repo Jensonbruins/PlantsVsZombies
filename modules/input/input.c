@@ -80,6 +80,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 laneArray[0].blockArray[helper_id].plantId = id;
                 topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+                sideBarObject->selection = 0;
             }
         } else if (y > lane2start && y < lane3start) {
             if (x > grid1start && x < grid9stop) {
@@ -88,6 +89,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 laneArray[1].blockArray[helper_id].plantId = id;
                 topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+                sideBarObject->selection = 0;
             }
         } else if (y > lane3start && y < lane4start) {
             if (x > grid1start && x < grid9stop) {
@@ -96,6 +98,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 laneArray[2].blockArray[helper_id].plantId = id;
                 topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+                sideBarObject->selection = 0;
             }
         } else if (y > lane4start && y < lane5start) {
             if (x > grid1start && x < grid9stop) {
@@ -104,6 +107,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 laneArray[3].blockArray[helper_id].plantId = id;
                 topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+                sideBarObject->selection = 0;
             }
         } else if (y > lane5start && y < lane5stop) {
             if (x > grid1start && x < grid9stop) {
@@ -112,6 +116,7 @@ static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5]
                 laneArray[4].blockArray[helper_id].plantId = id;
                 topBarObject->amount = topBarObject->amount - cost;
                 init_plant(renderer, &plantObjects[id], sideBarObject->selection);
+                sideBarObject->selection = 0;
             }
         }
     }
