@@ -21,6 +21,7 @@ extern void init_plant(SDL_Renderer *renderer, plant *object, int plant) {
 }
 
 static void init_peashooter(SDL_Renderer *renderer, plant *object) {
+    object->type = 1;
     object->health = 4;
     object->state = 0;
     // Counters to keep track of everything
@@ -37,6 +38,7 @@ static void init_peashooter(SDL_Renderer *renderer, plant *object) {
 }
 
 static void init_sunflower(SDL_Renderer *renderer, plant *object) {
+    object->type = 2;
     object->health = 4;
     object->state = 0;
     // Counters to keep track of everything

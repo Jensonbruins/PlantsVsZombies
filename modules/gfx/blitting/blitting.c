@@ -93,7 +93,7 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie objects[40], int amount) 
 
 extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
     if (object->health > 0) {
-        if (object->state == 0) {
+        if (object->state == 0 || object->state == 1) {
             blit(renderer, object->textureIdle[object->idleCounter], x, y);
 
             object->delayCounter++;
