@@ -32,42 +32,45 @@ extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTextu
     blit(renderer, backgroundTexture, 0, 0);
 }
 
-extern void draw_zombie(SDL_Renderer *renderer, zombie *object) {
-    if (object->health > 0) {
-        int y;
-        switch(object->lane) {
-            case(0):
-                y = 50;
-                break;
-            case(1):
-                y = 200;
-                break;
-            case(2):
-                y = 360;
-                break;
-            case(3):
-                y = 470;
-                break;
-            case(4):
-                y = 640;
-                break;
-        }
-        if (object->state == 0) {
-
-            blit(renderer, object->textureWalk[object->walkCounter], object->x, y);
-
-            object->delayCounter++;
-
-            if (object->delayCounter >= 5) {
-                object->walkCounter++;
-                object->delayCounter = 0;
+extern void draw_zombie(SDL_Renderer *renderer, zombie objects[40], int amount) {
+    for (int k = 0; k < amount; k++) {
+        if (objects[k].health > 0) {
+            int y;
+            switch(objects[k].lane) {
+                case(0):
+                    y = 50;
+                    break;
+                case(1):
+                    y = 200;
+                    break;
+                case(2):
+                    y = 360;
+                    break;
+                case(3):
+                    y = 470;
+                    break;
+                case(4):
+                    y = 640;
+                    break;
             }
+            if (objects[k].state == 0) {
 
-            if (object->walkCounter >= object->amountWalkTexture) {
-                object->walkCounter = 0;
+                blit(renderer, objects[k].textureWalk[objects[k].walkCounter], objects[k].x, y);
+
+                objects[k].delayCounter++;
+
+                if (objects[k].delayCounter >= 5) {
+                    objects[k].walkCounter++;
+                    objects[k].delayCounter = 0;
+                }
+
+                if (objects[k].walkCounter >= objects[k].amountWalkTexture) {
+                    objects[k].walkCounter = 0;
+                }
             }
         }
     }
+
 //        if (zombie->state == 1) {
 //            blit(renderer, zombie->textureAttack[zombie->attackCounter], zombie->components.x, zombie->components.y);
 //
