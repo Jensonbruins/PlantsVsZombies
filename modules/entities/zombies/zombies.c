@@ -24,15 +24,23 @@ static void init_standard_zombie(SDL_Renderer *renderer, zombie *zombie, int lan
     zombie->health = 5;
     zombie->lane = lane;
     zombie->state = 0;
+
     // Counters to keep track of everything
     zombie->delayCounter = 0;
     zombie->walkCounter = 0;
     zombie->attackCounter = 0;
     zombie->dieCounter = 0;
+
     // Die texture
     zombie->amountWalkTexture = 20;
     zombie->amountAttackTexture = 11;
     zombie->amountDieTexture = 0;
+
+    // Damage
+    zombie->damage = 1;
+    zombie->lastHit = 0;
+
+    // Textures
     texture_initializer(renderer, "gfx/zombie/default/", "walk_", zombie->amountWalkTexture,
                         (SDL_Texture * *) & zombie->textureWalk);
     texture_initializer(renderer, "gfx/zombie/default/", "attack_", zombie->amountAttackTexture,
@@ -44,15 +52,23 @@ static void init_cone_zombie(SDL_Renderer *renderer, zombie *zombie, int lane, i
     zombie->health = 10;
     zombie->lane = lane;
     zombie->state = 0;
+
     // Counters to keep track of everything
     zombie->delayCounter = 0;
     zombie->walkCounter = 0;
     zombie->attackCounter = 0;
     zombie->dieCounter = 0;
+
     // Die texture
     zombie->amountWalkTexture = 20;
     zombie->amountAttackTexture = 11;
     zombie->amountDieTexture = 0;
+
+    // Damage
+    zombie->damage = 2;
+    zombie->lastHit = 0;
+
+    // Textures
     texture_initializer(renderer, "gfx/zombie/cone/", "walk_", zombie->amountWalkTexture,
                         (SDL_Texture * *) & zombie->textureWalk);
     texture_initializer(renderer, "gfx/zombie/cone/", "attack_", zombie->amountAttackTexture,

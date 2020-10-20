@@ -19,6 +19,9 @@ typedef struct _zombie_ {
     int walkCounter;
     int attackCounter;
     int dieCounter;
+    // damage items
+    int damage;
+    unsigned int lastHit;
     // Storing the animation preserve 30 cuz thats the max animations of the biggest object ;)
     SDL_Texture *textureWalk[30];
     SDL_Texture *textureAttack[30];

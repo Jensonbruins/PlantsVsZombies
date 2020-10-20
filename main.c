@@ -20,12 +20,13 @@ int main(int argc, char *argv[]) {
     init_side_bar(renderer, &sideBarObject);
 
     zombie zombieObjects[40];
-    int amountOfZombies = 4;
+    int amountOfZombies = 5;
     int zombieArray[40][3] = {
-            {0, 1200, 2},
-            {0, 1400, 2},
+            {0, 1000, 2},
             {1, 1200, 2},
-            {3, 1200, 2}
+            {2, 1200, 2},
+            {3, 1200, 2},
+            {4, 1200, 2}
     };
     init_zombies(renderer, (zombie *) &zombieObjects, zombieArray, amountOfZombies);
 
@@ -73,7 +74,8 @@ int main(int argc, char *argv[]) {
 
         draw_zombie(renderer, (zombie *) &zombieObjects, amountOfZombies);
         move_zombie((zombie *) &zombieObjects, amountOfZombies);
-//        zombie_check_collision((zombie *) &zombieObjects, (lane *) &laneArray);
+
+        zombie_check_collision((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant*) &plantObjects);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic

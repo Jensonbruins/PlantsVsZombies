@@ -68,23 +68,24 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie objects[40], int amount) 
                     objects[k].walkCounter = 0;
                 }
             }
-        }
-    }
 
-//        if (zombie->state == 1) {
-//            blit(renderer, zombie->textureAttack[zombie->attackCounter], zombie->components.x, zombie->components.y);
-//
-//            zombie->slowDownCounter++;
-//
-//            if (zombie->slowDownCounter >= 5) {
-//                zombie->attackCounter++;
-//                zombie->slowDownCounter = 0;
-//            }
-//
-//            if (zombie->attackCounter >= zombie->amountAttackTexture) {
-//                zombie->attackCounter = 0;
-//            }
-//        }
+            if (objects[k].state == 1) {
+                blit(renderer, objects[k].textureAttack[objects[k].attackCounter], objects[k].x, y);
+
+                objects[k].delayCounter++;
+
+                if (objects[k].delayCounter >= 5) {
+                    objects[k].attackCounter++;
+                    objects[k].delayCounter = 0;
+                }
+
+                if (objects[k].attackCounter >= objects[k].amountAttackTexture) {
+                    objects[k].attackCounter = 0;
+                }
+            }
+        }
+
+    }
 //        if (zombie->state == 2) {
 //
 //        }
