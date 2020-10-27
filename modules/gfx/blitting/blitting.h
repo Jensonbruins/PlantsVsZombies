@@ -8,9 +8,13 @@
 #include "../../../includes/zombieBlueprints.h"
 #include "../../../includes/plantBlueprints.h"
 
-extern void draw_background(SDL_Renderer *renderer, SDL_Texture *txtr);
+extern void draw_pre_game(SDL_Renderer *renderer, SDL_Texture *preGameTexture, TTF_Font *font);
 
-extern void draw_zombie(SDL_Renderer *renderer, zombie objects[40], int amount);
+extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTexture);
+
+extern void draw_defeat_game(SDL_Renderer *renderer, SDL_Texture *preGameTexture, TTF_Font *font);
+
+extern void draw_zombie(SDL_Renderer *renderer, zombie objects[50], int amount);
 
 extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y);
 

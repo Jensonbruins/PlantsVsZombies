@@ -8,10 +8,10 @@
 #include "../../../includes/zombieBlueprints.h"
 #include "../../filesystem/filesystem.h"
 
-extern void init_zombies(SDL_Renderer *renderer, zombie objects[40], int array[][3], int amount);
+extern void init_zombies(SDL_Renderer *renderer, zombie objects[50], int array[][3], int amount);
 
 extern void init_debug_zombie(SDL_Renderer *renderer, zombie *zombie);
 
-extern void move_zombie(zombie objects[40], int amount);
+extern void move_zombie(zombie objects[50], int amount, int* gameState);
 
 #endif //PLANTSVSZOMBIES_ZOMBIES_H

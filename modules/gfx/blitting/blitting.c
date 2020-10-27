@@ -18,9 +18,38 @@ static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y) {
     SDL_RenderCopy(renderer, txtr, NULL, &dest);
 }
 
+extern void draw_pre_game(SDL_Renderer *renderer, SDL_Texture *preGameTexture, TTF_Font *font) {
+    blit(renderer, preGameTexture, 350, 0);
+
+    int textWidth, textHeight;
+
+    SDL_Color colorWhite = {255, 255, 255, 255};
+    SDL_Surface *surface = TTF_RenderText_Solid(font, "Press ENTER to start the game!", colorWhite);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    TTF_SizeText(font, "Press ENTER to start the game!", &textWidth, &textHeight);
+    SDL_Rect textBox = {600, 600, textWidth, textHeight};
+    SDL_RenderCopy(renderer, texture, NULL, &textBox);
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
+}
 
 extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTexture) {
     blit(renderer, backgroundTexture, 0, 0);
+}
+
+extern void draw_defeat_game(SDL_Renderer *renderer, SDL_Texture *preGameTexture, TTF_Font *font) {
+    blit(renderer, preGameTexture, 350, 0);
+
+    int textWidth, textHeight;
+
+    SDL_Color colorWhite = {255, 255, 255, 255};
+    SDL_Surface *surface = TTF_RenderText_Solid(font, "You have failed! The zombies attacked your house", colorWhite);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
+    TTF_SizeText(font, "You have failed! The zombies attacked your house", &textWidth, &textHeight);
+    SDL_Rect textBox = {500, 600, textWidth, textHeight};
+    SDL_RenderCopy(renderer, texture, NULL, &textBox);
+    SDL_DestroyTexture(texture);
+    SDL_FreeSurface(surface);
 }
 
 extern void draw_zombie(SDL_Renderer *renderer, zombie objects[50], int amount) {

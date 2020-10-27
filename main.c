@@ -13,6 +13,8 @@ int main(int argc, char *argv[]) {
 
     init_sdl();
 
+    int gameState = 0;
+
     topBar topBarObject;
     init_top_bar(renderer, &topBarObject);
 
@@ -20,12 +22,19 @@ int main(int argc, char *argv[]) {
     init_side_bar(renderer, &sideBarObject);
 
     zombie zombieObjects[50];
-    int amountOfZombies = 4;
+    int amountOfZombies = 11;
     int zombieArray[50][3] = {
-            {0, 1600, 1},
-            {1, 1600, 2},
-            {2, 1600, 3},
-            {3, 1600, 4}
+            {0, 1800, 1},
+            {0, 3200, 2},
+            {0, 4400, 2},
+            {1, 2000, 1},
+            {1, 2500, 1},
+            {1, 5000, 3},
+            {2, 1990, 1},
+            {3, 6600, 3},
+            {4, 2300, 2},
+            {4, 4500, 3},
+            {4, 2500, 1}
     };
     init_zombies(renderer, (zombie *) &zombieObjects, zombieArray, amountOfZombies);
 
@@ -65,6 +74,7 @@ int main(int argc, char *argv[]) {
     };
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
+    SDL_Texture *pregameTexture = texture_loader(renderer, "gfx/background/pregame.png");
     TTF_Font *font = TTF_OpenFont("gfx/hud/sun/arial.ttf", 28);
 
     int fps = 60;
@@ -72,24 +82,34 @@ int main(int argc, char *argv[]) {
     unsigned int frameTime;
     while (1) {
         firstFrame = SDL_GetTicks();
-        process_input(window, renderer, font, (lane *) &laneArray, (plant *) &plantObjects, (sun *) &sunObjects, &sideBarObject, &topBarObject);                          // Process key input and mouse input
+        process_input(window, renderer, font, &gameState, (lane *) &laneArray, (plant *) &plantObjects, (sun *) &sunObjects, &sideBarObject, &topBarObject);                          // Process key input and mouse input
         SDL_RenderClear(renderer);
 
-        draw_background(renderer, backgroundTexture);
-        draw_topbar(renderer, &topBarObject, font);
-        draw_sidebar(renderer, &sideBarObject, &topBarObject);
-        draw_projectile(renderer, (projectile *) &projectileObjects);
-        draw_plants(renderer, (lane *) &laneArray, (plant *) &plantObjects);
-        draw_zombie(renderer, (zombie *) &zombieObjects, amountOfZombies);
-        draw_sun(renderer, (sun *) &sunObjects);
+        switch(gameState) {
+            case 0:
+                draw_pre_game(renderer, pregameTexture, font);
+                break;
+            case 1:
+                draw_background(renderer, backgroundTexture);
+                draw_topbar(renderer, &topBarObject, font);
+                draw_sidebar(renderer, &sideBarObject, &topBarObject);
+                draw_projectile(renderer, (projectile *) &projectileObjects);
+                draw_plants(renderer, (lane *) &laneArray, (plant *) &plantObjects);
+                draw_zombie(renderer, (zombie *) &zombieObjects, amountOfZombies);
+                draw_sun(renderer, (sun *) &sunObjects);
 
-        move_zombie((zombie *) &zombieObjects, amountOfZombies);
-        move_projectile((projectile *) &projectileObjects);
+                move_zombie((zombie *) &zombieObjects, amountOfZombies, &gameState);
+                move_projectile((projectile *) &projectileObjects);
 
-        zombie_check_collision((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
-        zombie_check_in_range((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
-        plant_check_state(renderer, (plant *) &plantObjects, (lane *) &laneArray, (projectile *) &projectileObjects, (sun *) &sunObjects);
-        projectile_check_hit((zombie *) &zombieObjects, (projectile *) &projectileObjects);
+                zombie_check_collision((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
+                zombie_check_in_range((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
+                plant_check_state(renderer, (plant *) &plantObjects, (lane *) &laneArray, (projectile *) &projectileObjects, (sun *) &sunObjects);
+                projectile_check_hit((zombie *) &zombieObjects, (projectile *) &projectileObjects);
+                break;
+            case 2:
+                draw_defeat_game(renderer, pregameTexture, font);
+                break;
+        }
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic
@@ -126,8 +146,8 @@ static void init_sdl() {
         printf("Failed to create renderer -- Error: %s\n", SDL_GetError());
         exit(1);
     }
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
-        printf("Failed to create mixer -- Error: %s\n", SDL_GetError());
-        exit(1);
-    }
+//    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
+//        printf("Failed to create mixer -- Error: %s\n", SDL_GetError());
+//        exit(1);
+//    }
 }

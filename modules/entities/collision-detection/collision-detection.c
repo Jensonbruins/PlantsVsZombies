@@ -8,7 +8,7 @@ static void zombie_collision_helper(zombie *zombieObject, lane *laneObject, plan
 
 static void in_range_helper(zombie *zombieObject, lane *laneObject, plant plantArray[45]);
 
-extern void zombie_check_collision(zombie zombieObject[40], int amount, lane laneArray[5], plant plantArray[45]) {
+extern void zombie_check_collision(zombie zombieObject[50], int amount, lane laneArray[5], plant plantArray[45]) {
     for (int k = 0; k < amount; k++) {
         switch (zombieObject[k].lane) {
             case 0:
@@ -60,7 +60,7 @@ static void zombie_collision_helper(zombie *zombieObject, lane *laneObject, plan
     }
 }
 
-extern void zombie_check_in_range(zombie zombieObject[40], int amount, lane laneArray[5], plant plantArray[45]) {
+extern void zombie_check_in_range(zombie zombieObject[50], int amount, lane laneArray[5], plant plantArray[45]) {
     for (int k = 0; k < amount; k++) {
         switch (zombieObject[k].lane) {
             case 0:
@@ -87,20 +87,22 @@ extern void zombie_check_in_range(zombie zombieObject[40], int amount, lane lane
 static void in_range_helper(zombie *zombieObject, lane *laneObject, plant plantArray[45]) {
     for (int k = 0; k < 9; k++) {
         if (!(laneObject->blockArray[k].plantId > 45)) {
-            if (plantArray[laneObject->blockArray[k].plantId].health > 0 && zombieObject->health > 0) {
-                if (laneObject->blockArray[k].x < zombieObject->x && zombieObject->x < 1500) {
-                    plantArray[laneObject->blockArray[k].plantId].state = 1;
+            if (plantArray[laneObject->blockArray[k].plantId].canShoot == 1) {
+                if (plantArray[laneObject->blockArray[k].plantId].health > 0 && zombieObject->health > 0) {
+                    if (laneObject->blockArray[k].x < zombieObject->x && zombieObject->x < 1500) {
+                        plantArray[laneObject->blockArray[k].plantId].state = 1;
+                    } else {
+                        plantArray[laneObject->blockArray[k].plantId].state = 0;
+                    }
                 } else {
                     plantArray[laneObject->blockArray[k].plantId].state = 0;
                 }
-            } else {
-                plantArray[laneObject->blockArray[k].plantId].state = 0;
             }
         }
     }
 }
 
-extern void projectile_check_hit(zombie zombieObjects[40], projectile projectileObjects[50]) {
+extern void projectile_check_hit(zombie zombieObjects[50], projectile projectileObjects[50]) {
     for (int k = 0; k < 50; k++) {
         if (projectileObjects[k].alive > 0) {
             for (int n = 0; n < 40; n++) {

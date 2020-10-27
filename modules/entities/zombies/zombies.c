@@ -164,12 +164,15 @@ extern void init_debug_zombie(SDL_Renderer *renderer, zombie *zombie) {
 
 }
 
-extern void move_zombie(zombie objects[40], int amount) {
+extern void move_zombie(zombie objects[50], int amount, int* gameState) {
     for (int k = 0; k < amount; k++) {
         if (objects[k].health > 0) {
             if (objects[k].delayCounter >= 4) {
                 if (objects[k].state == 0) {
                     objects[k].x = objects[k].x - 2;
+                    if (objects[k].x < 140) {
+                        *gameState = 2;
+                    }
                 }
             }
         }

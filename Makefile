@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -std=c99 -Wall -Wextra -Wconversion -Wpedantic `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_mixer -lSDL2_ttf
+CFLAGS = -std=c99 -Wall -Wextra -Wconversion -Wpedantic `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_ttf
 OBJECTS = objects
 
-all: clean filesystem.o gfx input.o sfx.o entities move
-	$(CC) -o PlantsVsZombies main.c $(CFLAGS) $(OBJECTS)/blitting.o $(OBJECTS)/collision-detection.o $(OBJECTS)/filesystem.o $(OBJECTS)/input.o $(OBJECTS)/plants.o $(OBJECTS)/sfx.o $(OBJECTS)/timing.o $(OBJECTS)/zombies.o -lm
+all: clean filesystem.o gfx input.o entities move
+	$(CC) -o PlantsVsZombies main.c $(CFLAGS) $(OBJECTS)/blitting.o $(OBJECTS)/collision-detection.o $(OBJECTS)/filesystem.o $(OBJECTS)/input.o $(OBJECTS)/plants.o $(OBJECTS)/timing.o $(OBJECTS)/zombies.o -lm
 
 blitting.o:
 	$(CC) $(CFLAGS) -c modules/gfx/blitting/blitting.c
@@ -30,9 +30,6 @@ move:
 
 plants.o: filesystem.o
 	$(CC) $(CFLAGS) -c modules/entities/plants/plants.c
-
-sfx.o:
-	$(CC) $(CFLAGS) -c modules/sfx/sfx.c
 
 timing.o:
 	$(CC) $(CFLAGS) -c modules/gfx/timing/timing.c

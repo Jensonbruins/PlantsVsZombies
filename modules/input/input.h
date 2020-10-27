@@ -9,6 +9,6 @@
 #include "../../includes/plantBlueprints.h"
 #include "../entities/plants/plants.h"
 
-extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantArray[45], sun sunObjects[20],sideBar *sideBarObject, topBar *topBarObject);
+extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, int* gameState, lane laneArray[5], plant plantArray[45], sun sunObjects[20],sideBar *sideBarObject, topBar *topBarObject);
 
 #endif //PLANTSVSZOMBIES_INPUT_H

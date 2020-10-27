@@ -65,9 +65,7 @@ extern void plant_check_state(SDL_Renderer *renderer, plant plantObjects[45], la
                             switch (plantObjects[k].type) {
                                 case (1):
                                     if ((unsigned int) (plantObjects[k].lastShot + 3000) <= SDL_GetTicks()) {
-                                        init_peashooter_projectile(renderer, row, laneObjects[row].blockArray[t].x,
-                                                                   laneObjects[row].y,
-                                                                   &projectileObjects[projectileNumber]);
+                                        init_peashooter_projectile(renderer, row, laneObjects[row].blockArray[t].x, laneObjects[row].y, &projectileObjects[projectileNumber]);
                                         plantObjects[k].lastShot = SDL_GetTicks();
                                     }
                                     break;
@@ -109,6 +107,7 @@ static void init_peashooter(SDL_Renderer *renderer, plant *object) {
     object->attackCounter = 0;
     object->dieCounter = 0;
     object->lastShot = SDL_GetTicks();
+    object->canShoot = 1;
     // Die texture
     object->amountIdleTexture = 13;
     object->amountAttackTexture = 0;
@@ -126,6 +125,7 @@ static void init_sunflower(SDL_Renderer *renderer, plant *object) {
     object->idleCounter = 0;
     object->attackCounter = 0;
     object->dieCounter = 0;
+    object->canShoot = 0;
     // Die texture
     object->lastShot = SDL_GetTicks();
     object->amountIdleTexture = 18;
@@ -145,6 +145,7 @@ static void init_walnut(SDL_Renderer *renderer, plant *object) {
     object->attackCounter = 0;
     object->dieCounter = 0;
     // Die texture
+    object->canShoot = 0;
     object->lastShot = SDL_GetTicks();
     object->amountIdleTexture = 16;
     object->amountAttackTexture = 0;

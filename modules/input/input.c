@@ -10,7 +10,7 @@ static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5]
 
 static int handle_click_helper(int x);
 
-extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45], sun sunObjects[20], sideBar *sideBarObject, topBar *topBarObject) {
+extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, int* gameState,lane laneArray[5], plant plantObjects[45], sun sunObjects[20], sideBar *sideBarObject, topBar *topBarObject) {
     SDL_Event event;
     int mouseX;
     int mouseY;
@@ -25,6 +25,9 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
                 handle_click(mouseX, mouseY, renderer, laneArray, plantObjects, sunObjects, sideBarObject, topBarObject);
                 break;
             case SDL_KEYDOWN:
+                if (event.key.keysym.scancode == SDL_SCANCODE_RETURN) {
+                    *gameState = 1;
+                }
                 if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
                     proper_shutdown(renderer, window, font);
                     exit(0);
@@ -171,7 +174,6 @@ static int handle_click_helper(int x) {
 }
 
 static void proper_shutdown(SDL_Renderer *renderer, SDL_Window *window, TTF_Font *font) {
-    Mix_CloseAudio();
     TTF_CloseFont(font);
     TTF_Quit();
     SDL_DestroyRenderer(renderer);
