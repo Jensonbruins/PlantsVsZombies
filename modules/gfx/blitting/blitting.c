@@ -5,7 +5,9 @@
 #include "blitting.h"
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y);
+
 static void helper_sidebar_item(SDL_Renderer *renderer, sideBar *object, int amount, int x, int y, int cost, int item);
+
 static void helper_sidebar(SDL_Renderer *renderer, int x, int y, int color);
 //static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle);
 
@@ -36,20 +38,20 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie objects[40], int amount) 
     for (int k = 0; k < amount; k++) {
         if (objects[k].health > 0) {
             int y;
-            switch(objects[k].lane) {
-                case(0):
+            switch (objects[k].lane) {
+                case (0):
                     y = 50;
                     break;
-                case(1):
+                case (1):
                     y = 200;
                     break;
-                case(2):
+                case (2):
                     y = 360;
                     break;
-                case(3):
+                case (3):
                     y = 470;
                     break;
-                case(4):
+                case (4):
                     y = 640;
                     break;
             }
@@ -111,7 +113,7 @@ extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
 }
 
 extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantArray[45]) {
-    for(int row = 0; row <= 4; row++) {
+    for (int row = 0; row <= 4; row++) {
         int y = laneArray[row].y;
 //        printf("%d\n", y);
         for (int column = 0; column <= 8; column++) {
@@ -121,12 +123,12 @@ extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantAr
             }
 
             int x = laneArray[row].blockArray[column].x;
-            draw_plant(renderer,&plantArray[plantId],x,y);
+            draw_plant(renderer, &plantArray[plantId], x, y);
         }
     }
 }
 
-extern void draw_projectile(SDL_Renderer *renderer ,projectile object[50]) {
+extern void draw_projectile(SDL_Renderer *renderer, projectile object[50]) {
     for (int k = 0; k < 50; k++) {
         if (object[k].alive > 0) {
             blit(renderer, object[k].texture, object[k].x, object[k].y);
@@ -158,11 +160,11 @@ extern void draw_topbar(SDL_Renderer *renderer, topBar *object, TTF_Font *font) 
     int textWidth, textHeight;
     sprintf(amount, "%d", object->amount);
 
-    SDL_Color colorBlack = {0,0,0, 255};
+    SDL_Color colorBlack = {0, 0, 0, 255};
     SDL_Surface *surface = TTF_RenderText_Solid(font, amount, colorBlack);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surface);
     TTF_SizeText(font, amount, &textWidth, &textHeight);
-    SDL_Rect textBox = {456, 14, textWidth,textHeight};
+    SDL_Rect textBox = {456, 14, textWidth, textHeight};
     SDL_RenderCopy(renderer, texture, NULL, &textBox);
     SDL_DestroyTexture(texture);
     SDL_FreeSurface(surface);
@@ -185,7 +187,7 @@ extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object, topBar *topBar
     helper_sidebar_item(renderer, object, topBarObject->amount, x, y, 50, 2);
 }
 
-static void helper_sidebar_item(SDL_Renderer *renderer,sideBar *object, int amount, int x, int y, int cost, int item) {
+static void helper_sidebar_item(SDL_Renderer *renderer, sideBar *object, int amount, int x, int y, int cost, int item) {
     if (amount < cost) {
         helper_sidebar(renderer, x, y, 0);
         if (object->selection == item) {
@@ -198,17 +200,17 @@ static void helper_sidebar_item(SDL_Renderer *renderer,sideBar *object, int amou
 
 static void helper_sidebar(SDL_Renderer *renderer, int x, int y, int color) {
     if (color == 0) {
-        SDL_SetRenderDrawColor(renderer, 105,105,105, 160);
+        SDL_SetRenderDrawColor(renderer, 105, 105, 105, 160);
         SDL_Rect insufficientFunds = {x, y, 107, 66};
         SDL_RenderFillRect(renderer, &insufficientFunds);
     } else {
-        SDL_SetRenderDrawColor(renderer, 255,0,0, 255);
-        SDL_Rect topToRight = {x, y+3, 20, 6};
-        SDL_Rect topToLeft = {x+84, y+3, 20, 6};
-        SDL_Rect topLeftToBottom = {x, y+3, 6, 20};
-        SDL_Rect topRightToBottom = {x+100, y+3, 6, 20};
-        SDL_Rect bottomLeftToTop = {x, y+46, 6, 20};
-        SDL_Rect bottomRightToTop = {x+100, y+46, 6, 20};
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_Rect topToRight = {x, y + 3, 20, 6};
+        SDL_Rect topToLeft = {x + 84, y + 3, 20, 6};
+        SDL_Rect topLeftToBottom = {x, y + 3, 6, 20};
+        SDL_Rect topRightToBottom = {x + 100, y + 3, 6, 20};
+        SDL_Rect bottomLeftToTop = {x, y + 46, 6, 20};
+        SDL_Rect bottomRightToTop = {x + 100, y + 46, 6, 20};
         SDL_Rect bottomToRight = {x, y + 60, 20, 6};
         SDL_Rect bottomToLeft = {x + 84, y + 60, 20, 6};
         SDL_RenderFillRect(renderer, &topToRight);

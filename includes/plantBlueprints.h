@@ -4,6 +4,7 @@
 
 #ifndef PLANTSVSZOMBIES_PLANTBLUEPRINTS_H
 #define PLANTSVSZOMBIES_PLANTBLUEPRINTS_H
+
 #include "sdl.h"
 
 typedef struct _gridBlock_ {
@@ -49,8 +50,10 @@ typedef struct _projectile_ {
 typedef struct _sun_ {
     int x;
     int y;
-    int health;
+    int alive;
+    int worth;
     int counter;
+    unsigned int spawnTimer;
     SDL_Texture *texture[2];
 } sun;
 

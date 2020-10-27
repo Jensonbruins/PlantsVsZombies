@@ -5,7 +5,7 @@
 #include "filesystem.h"
 
 extern void texture_initializer(SDL_Renderer *renderer, char *path, char *filePrefix, int amountTextures, SDL_Texture *textureSet[]) {
-    for(int temp = 0; temp < amountTextures; temp++) {
+    for (int temp = 0; temp < amountTextures; temp++) {
         char filename[50];
 
         sprintf(filename, "%s%s%d.png", path, filePrefix, (temp + 1));

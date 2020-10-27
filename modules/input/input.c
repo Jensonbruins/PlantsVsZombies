@@ -3,25 +3,26 @@
 //
 
 #include "input.h"
+
 static void proper_shutdown(SDL_Renderer *renderer, SDL_Window *window, TTF_Font *font);
-static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject);
+
+static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject);
+
 static int handle_click_helper(int x);
 
 extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject) {
     SDL_Event event;
     int mouseX;
     int mouseY;
-    while (SDL_PollEvent(&event))
-    {
-        switch (event.type)
-        {
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
             case SDL_QUIT:
                 proper_shutdown(renderer, window, font);
                 exit(0);
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                SDL_GetMouseState(&mouseX,&mouseY);
-                handle_click(mouseX,mouseY,renderer, laneArray,plantObjects, sideBarObject, topBarObject);
+                SDL_GetMouseState(&mouseX, &mouseY);
+                handle_click(mouseX, mouseY, renderer, laneArray, plantObjects, sideBarObject, topBarObject);
                 break;
             case SDL_KEYDOWN:
                 if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -35,7 +36,7 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
     }
 }
 
-static void handle_click(int x, int y,SDL_Renderer *renderer , lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject) {
+static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject) {
     int lane1start = 120;
     int lane2start = 238;
     int lane3start = 380;

@@ -29,9 +29,18 @@ int main(int argc, char *argv[]) {
 
     plant plantObjects[45];
     projectile projectileObjects[50];
+    sun sunObjects[20];
 
     int noPlant = 50;
-    int block1 = 410; int block2 = 540; int block3 = 670; int block4 = 800; int block5 = 920; int block6 = 1050; int block7 = 1170; int block8 = 1300; int block9 = 1430;
+    int block1 = 410;
+    int block2 = 540;
+    int block3 = 670;
+    int block4 = 800;
+    int block5 = 920;
+    int block6 = 1050;
+    int block7 = 1170;
+    int block8 = 1300;
+    int block9 = 1430;
 
     gridBlock blockArray[9] = {
             {block1, noPlant},
@@ -46,11 +55,11 @@ int main(int argc, char *argv[]) {
     };
 
     lane laneArray[5] = {
-            { 120 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
-            { 270 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
-            { 420 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
-            { 560 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
-            { 700 , {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}}
+            {120, {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            {270, {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            {420, {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            {560, {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}},
+            {700, {{blockArray[0].x, blockArray[0].plantId}, {blockArray[1].x, blockArray[1].plantId}, {blockArray[2].x, blockArray[2].plantId}, {blockArray[3].x, blockArray[3].plantId}, {blockArray[4].x, blockArray[4].plantId}, {blockArray[5].x, blockArray[5].plantId}, {blockArray[6].x, blockArray[6].plantId}, {blockArray[7].x, blockArray[7].plantId}, {blockArray[8].x, blockArray[8].plantId}}}
     };
 
     SDL_Texture *backgroundTexture = texture_loader(renderer, "gfx/background/background.png");
@@ -61,23 +70,24 @@ int main(int argc, char *argv[]) {
     unsigned int frameTime;
     while (1) {
         firstFrame = SDL_GetTicks();                                    // Frame cap logic
-        process_input(window, renderer, font, (lane*) &laneArray,(plant*) &plantObjects, &sideBarObject, &topBarObject);                          // Process key input and mouse input
+        process_input(window, renderer, font, (lane *) &laneArray, (plant *) &plantObjects, &sideBarObject,
+                      &topBarObject);                          // Process key input and mouse input
         SDL_RenderClear(renderer);                                      // Remove all from renderer
 
         draw_background(renderer, backgroundTexture);                   // Set background
         draw_topbar(renderer, &topBarObject, font);
         draw_sidebar(renderer, &sideBarObject, &topBarObject);
 
-        draw_projectile(renderer,(projectile *) &projectileObjects);
+        draw_projectile(renderer, (projectile *) &projectileObjects);
 
-        draw_plants(renderer,(lane*) &laneArray,(plant*) &plantObjects);
+        draw_plants(renderer, (lane *) &laneArray, (plant *) &plantObjects);
 
         draw_zombie(renderer, (zombie *) &zombieObjects, amountOfZombies);
         move_zombie((zombie *) &zombieObjects, amountOfZombies);
 
-        zombie_check_collision((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant*) &plantObjects);
-        zombie_check_in_range((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant*) &plantObjects);
-        plant_check_state(renderer,(plant*) &plantObjects, (lane *) &laneArray, (projectile *) &projectileObjects);
+        zombie_check_collision((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
+        zombie_check_in_range((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
+        plant_check_state(renderer, (plant *) &plantObjects, (lane *) &laneArray, (projectile *) &projectileObjects, (sun *) &sunObjects);
 
         move_projectile((projectile *) &projectileObjects);
 
@@ -99,7 +109,7 @@ static void init_sdl() {
         printf("Couldn't initialize SDL: %s\n", SDL_GetError());
         exit(1);
     }
-    if(TTF_Init() < 0) {
+    if (TTF_Init() < 0) {
         printf("Failed to initialize SDL_ttf: %s\n", SDL_GetError());
         exit(1);
     }
@@ -108,8 +118,7 @@ static void init_sdl() {
         exit(1);
     }
 
-    window = SDL_CreateWindow("PlantsVsZombies", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-                              SCREEN_HEIGHT, window_flags);
+    window = SDL_CreateWindow("PlantsVsZombies", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, window_flags);
     if (window == NULL) {
         printf("Failed to create window -- Error: %s\n", SDL_GetError());
         exit(1);

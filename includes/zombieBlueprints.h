@@ -4,7 +4,9 @@
 
 #ifndef PLANTSVSZOMBIES_ZOMBIEBLUEPRINTS_H
 #define PLANTSVSZOMBIES_ZOMBIEBLUEPRINTS_H
+
 #include "sdl.h"
+
 typedef struct _zombie_ {
     int health;
     int x;

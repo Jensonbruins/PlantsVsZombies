@@ -4,6 +4,7 @@
 
 #ifndef PLANTSVSZOMBIES_MODULES_H
 #define PLANTSVSZOMBIES_MODULES_H
+
 #include "entities/collision-detection/collision-detection.h"
 #include "entities/plants/plants.h"
 #include "entities/zombies/zombies.h"
@@ -12,4 +13,5 @@
 #include "gfx/timing/timing.h"
 #include "input/input.h"
 #include "sfx/sfx.h"
+
 #endif //PLANTSVSZOMBIES_MODULES_H
