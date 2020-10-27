@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
 
         move_projectile((projectile *) &projectileObjects);
 
-//        projectile_check_hit((zombie *) &zombieObjects, (projectile *) &projectileObjects);
+        projectile_check_hit((zombie *) &zombieObjects, (projectile *) &projectileObjects);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture
         frameTime = SDL_GetTicks() - firstFrame;                        // Frame cap logic

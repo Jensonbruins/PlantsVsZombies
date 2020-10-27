@@ -85,12 +85,12 @@ extern void zombie_check_in_range(zombie zombieObject[40], int amount, lane lane
 static void in_range_helper(zombie *zombieObject, lane *laneObject, plant plantArray[45]) {
     for (int k = 0; k < 9; k++) {
         if (!(laneObject->blockArray[k].plantId > 45)) {
-            if (plantArray[laneObject->blockArray[k].plantId].health > 0) {
-                if (laneObject->blockArray[k].x < zombieObject->x && zombieObject->x < 1500) {
-                    plantArray[laneObject->blockArray[k].plantId].state = 1;
-                } else {
-                    plantArray[laneObject->blockArray[k].plantId].state = 0;
-                }
+            if (plantArray[laneObject->blockArray[k].plantId].health > 0 && zombieObject->health > 0) {
+                    if (laneObject->blockArray[k].x < zombieObject->x && zombieObject->x < 1500) {
+                        plantArray[laneObject->blockArray[k].plantId].state = 1;
+                    } else {
+                        plantArray[laneObject->blockArray[k].plantId].state = 0;
+                    }
             } else {
                 plantArray[laneObject->blockArray[k].plantId].state = 0;
             }
@@ -102,9 +102,17 @@ extern void projectile_check_hit(zombie zombieObjects[40], projectile projectile
     for (int k = 0; k < 50; k++) {
         if (projectileObjects[k].alive > 0) {
             for (int n = 0; n < 40; n ++) {
-                if (zombieObjects[n].lane == projectileObjects[k].lane) {
-                    if (zombieObjects[n].x <= projectileObjects[k].x) {
-                        projectileObjects[k].alive = 0;
+                if (zombieObjects[n].health > 0) {
+                    if (zombieObjects[n].lane == projectileObjects[k].lane) {
+                        if ((zombieObjects[n].x + 100) <= projectileObjects[k].x) {
+                            projectileObjects[k].alive = 0;
+                            if (zombieObjects[n].health <= 0) {
+                                zombieObjects[n].health = 0;
+                            } else {
+                                zombieObjects[n].health = zombieObjects[n].health - projectileObjects[k].damage;
+                            }
+                            break;
+                        }
                     }
                 }
             }

@@ -6,7 +6,7 @@
 
 static void init_peashooter(SDL_Renderer *renderer, plant *object);
 static void init_sunflower(SDL_Renderer *renderer, plant *object);
-static void init_projectile(SDL_Renderer *renderer, int lane, int x, int y, projectile *object);
+static void init_peashooter_projectile(SDL_Renderer *renderer, int lane, int x, int y, projectile *object);
 
 extern void init_plant(SDL_Renderer *renderer, plant *object, int plant) {
 
@@ -39,7 +39,6 @@ extern void plant_check_state(SDL_Renderer *renderer, plant plantObjects[45], la
                     for (int row = 0; row < 5; row++) {
                         for (int t = 0; t < 9; t++) {
                             if (laneObjects[row].blockArray[t].plantId == k) {
-                                printf("%d,%d\n",laneObjects[row].blockArray[t].plantId ,k);
                                 init_projectile(renderer, row, laneObjects[row].blockArray[t].x, laneObjects[row].y, &projectileObjects[projectileNumber]);
                                 plantObjects[k].lastShot = SDL_GetTicks();
                                 break;
@@ -94,7 +93,7 @@ static void init_sunflower(SDL_Renderer *renderer, plant *object) {
                         (SDL_Texture * *) & object->textureIdle);
 }
 
-static void init_projectile(SDL_Renderer *renderer, int lane,int x, int y, projectile *object) {
+static void init_peashooter_projectile(SDL_Renderer *renderer, int lane, int x, int y, projectile *object) {
     object->alive = 1;
     object->damage = 1;
     object->x = x + 54;
