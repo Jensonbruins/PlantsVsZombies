@@ -50,7 +50,7 @@ static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5]
     int sideBarStart = 50;
 
     for (int k = 1; k < 4; k++) {
-        if (x > 50 && x < 107) {
+        if (x > 50 && x < 150) {
             if (y > sideBarStart && y < (sideBarStart + 66)) {
                 if (sideBarObject->selection == k) {
                     sideBarObject->selection = 0;
