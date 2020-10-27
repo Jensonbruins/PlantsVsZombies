@@ -19,11 +19,13 @@ int main(int argc, char *argv[]) {
     sideBar sideBarObject;
     init_side_bar(renderer, &sideBarObject);
 
-    zombie zombieObjects[40];
-    int amountOfZombies = 2;
-    int zombieArray[40][3] = {
-            {0, 1600, 2},
-            {1, 1600, 2}
+    zombie zombieObjects[50];
+    int amountOfZombies = 4;
+    int zombieArray[50][3] = {
+            {0, 1600, 1},
+            {1, 1600, 2},
+            {2, 1600, 3},
+            {3, 1600, 4}
     };
     init_zombies(renderer, (zombie *) &zombieObjects, zombieArray, amountOfZombies);
 
@@ -69,28 +71,24 @@ int main(int argc, char *argv[]) {
     unsigned int firstFrame;
     unsigned int frameTime;
     while (1) {
-        firstFrame = SDL_GetTicks();                                    // Frame cap logic
-        process_input(window, renderer, font, (lane *) &laneArray, (plant *) &plantObjects, &sideBarObject,
-                      &topBarObject);                          // Process key input and mouse input
-        SDL_RenderClear(renderer);                                      // Remove all from renderer
+        firstFrame = SDL_GetTicks();
+        process_input(window, renderer, font, (lane *) &laneArray, (plant *) &plantObjects, (sun *) &sunObjects, &sideBarObject, &topBarObject);                          // Process key input and mouse input
+        SDL_RenderClear(renderer);
 
-        draw_background(renderer, backgroundTexture);                   // Set background
+        draw_background(renderer, backgroundTexture);
         draw_topbar(renderer, &topBarObject, font);
         draw_sidebar(renderer, &sideBarObject, &topBarObject);
-
         draw_projectile(renderer, (projectile *) &projectileObjects);
-
         draw_plants(renderer, (lane *) &laneArray, (plant *) &plantObjects);
-
         draw_zombie(renderer, (zombie *) &zombieObjects, amountOfZombies);
+        draw_sun(renderer, (sun *) &sunObjects);
+
         move_zombie((zombie *) &zombieObjects, amountOfZombies);
+        move_projectile((projectile *) &projectileObjects);
 
         zombie_check_collision((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
         zombie_check_in_range((zombie *) &zombieObjects, amountOfZombies, (lane *) &laneArray, (plant *) &plantObjects);
         plant_check_state(renderer, (plant *) &plantObjects, (lane *) &laneArray, (projectile *) &projectileObjects, (sun *) &sunObjects);
-
-        move_projectile((projectile *) &projectileObjects);
-
         projectile_check_hit((zombie *) &zombieObjects, (projectile *) &projectileObjects);
 
         SDL_RenderPresent(renderer);                                    // Create the big picture

@@ -8,6 +8,8 @@ static void init_peashooter(SDL_Renderer *renderer, plant *object);
 
 static void init_sunflower(SDL_Renderer *renderer, plant *object);
 
+static void init_walnut(SDL_Renderer *renderer, plant *object);
+
 static void init_peashooter_projectile(SDL_Renderer *renderer, int lane, int x, int y, projectile *object);
 
 static void init_sunflower_projectile(SDL_Renderer *renderer, int x, int y, sun *object);
@@ -20,6 +22,10 @@ extern void init_plant(SDL_Renderer *renderer, plant *object, int plant) {
             break;
         case 2:
             init_sunflower(renderer, object);
+            break;
+        case 3:
+            init_walnut(renderer, object);
+            break;
         default:
             break;
     }
@@ -71,7 +77,6 @@ extern void plant_check_state(SDL_Renderer *renderer, plant plantObjects[45], la
                                             init_sunflower_projectile(renderer, laneObjects[row].blockArray[t].x,
                                                                       laneObjects[row].y,
                                                                       &sunObjects[sunObjectNumber]);
-                                            printf("initialized\n");
                                         }
                                         plantObjects[k].lastShot = SDL_GetTicks();
                                     }
@@ -130,6 +135,24 @@ static void init_sunflower(SDL_Renderer *renderer, plant *object) {
                         (SDL_Texture **) &object->textureIdle);
 }
 
+static void init_walnut(SDL_Renderer *renderer, plant *object) {
+    object->type = 3;
+    object->health = 4;
+    object->state = 0;
+    // Counters to keep track of everything
+    object->delayCounter = 0;
+    object->idleCounter = 0;
+    object->attackCounter = 0;
+    object->dieCounter = 0;
+    // Die texture
+    object->lastShot = SDL_GetTicks();
+    object->amountIdleTexture = 16;
+    object->amountAttackTexture = 0;
+    object->amountDieTexture = 0;
+    texture_initializer(renderer, "gfx/plant/walnut/", "idle_", object->amountIdleTexture,
+                        (SDL_Texture **) &object->textureIdle);
+}
+
 static void init_peashooter_projectile(SDL_Renderer *renderer, int lane, int x, int y, projectile *object) {
     object->alive = 1;
     object->damage = 1;
@@ -142,8 +165,8 @@ static void init_peashooter_projectile(SDL_Renderer *renderer, int lane, int x, 
 static void init_sunflower_projectile(SDL_Renderer *renderer, int x, int y, sun *object) {
     object->alive = 1;
     object->worth = 25;
-    object->x = x;
-    object->y = y;
+    object->x = x + 20;
+    object->y = y + 40;
     object->counter = 0;
     object->spawnTimer = SDL_GetTicks();
     texture_initializer(renderer, "gfx/hud/sun/", "sun_", 2, (SDL_Texture **) &object->texture);
@@ -158,7 +181,8 @@ extern void init_top_bar(SDL_Renderer *renderer, topBar *object) {
 
 extern void init_side_bar(SDL_Renderer *renderer, sideBar *object) {
     object->selection = 0;
-    object->amountTextures = 2;
+    object->amountTextures = 3;
     object->texture[0] = texture_loader(renderer, "gfx/hud/sidebar/peashooterseed.png");
     object->texture[1] = texture_loader(renderer, "gfx/hud/sidebar/sunflowerseed.png");
+    object->texture[2] = texture_loader(renderer, "gfx/hud/sidebar/walnutseed.png");
 }

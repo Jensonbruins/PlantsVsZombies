@@ -18,6 +18,8 @@ extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant objects
 
 extern void draw_projectile(SDL_Renderer *renderer, projectile object[50]);
 
+extern void draw_sun(SDL_Renderer *renderer, sun object[20]);
+
 extern void draw_topbar(SDL_Renderer *renderer, topBar *object, TTF_Font *font);
 
 extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object, topBar *topBarObject);

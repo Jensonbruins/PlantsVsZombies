@@ -35,7 +35,7 @@ extern void zombie_check_collision(zombie zombieObject[40], int amount, lane lan
 static void zombie_collision_helper(zombie *zombieObject, lane *laneObject, plant plantArray[45]) {
     for (int k = 8; k >= 0; k--) {
         if (!(laneObject->blockArray[k].plantId > 45)) {
-            if (plantArray[laneObject->blockArray[k].plantId].health > 0) {
+            if (plantArray[laneObject->blockArray[k].plantId].health > 0 && zombieObject->health > 0) {
                 if (laneObject->blockArray[k].x >= (zombieObject->x + 50) &&
                     (zombieObject->x + 80) >= laneObject->blockArray[k].x) {
                     zombieObject->state = 1;

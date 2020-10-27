@@ -53,6 +53,7 @@ typedef struct _sun_ {
     int alive;
     int worth;
     int counter;
+    int delayCounter;
     unsigned int spawnTimer;
     SDL_Texture *texture[2];
 } sun;

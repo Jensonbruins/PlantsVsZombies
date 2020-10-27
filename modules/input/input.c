@@ -6,11 +6,11 @@
 
 static void proper_shutdown(SDL_Renderer *renderer, SDL_Window *window, TTF_Font *font);
 
-static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject);
+static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sun sunObjects[20], sideBar *sideBarObject, topBar *topBarObject);
 
 static int handle_click_helper(int x);
 
-extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject) {
+extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *font, lane laneArray[5], plant plantObjects[45], sun sunObjects[20], sideBar *sideBarObject, topBar *topBarObject) {
     SDL_Event event;
     int mouseX;
     int mouseY;
@@ -22,7 +22,7 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 SDL_GetMouseState(&mouseX, &mouseY);
-                handle_click(mouseX, mouseY, renderer, laneArray, plantObjects, sideBarObject, topBarObject);
+                handle_click(mouseX, mouseY, renderer, laneArray, plantObjects, sunObjects, sideBarObject, topBarObject);
                 break;
             case SDL_KEYDOWN:
                 if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
@@ -36,7 +36,7 @@ extern void process_input(SDL_Window *window, SDL_Renderer *renderer, TTF_Font *
     }
 }
 
-static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sideBar *sideBarObject, topBar *topBarObject) {
+static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5], plant plantObjects[45], sun sunObjects[20], sideBar *sideBarObject, topBar *topBarObject) {
     int lane1start = 120;
     int lane2start = 238;
     int lane3start = 380;
@@ -47,10 +47,9 @@ static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5]
     int grid1start = 392;
     int grid9stop = 1529;
 
-//    printf("%d,%d", x, y);
     int sideBarStart = 50;
 
-    for (int k = 1; k < 3; k++) {
+    for (int k = 1; k < 4; k++) {
         if (x > 50 && x < 107) {
             if (y > sideBarStart && y < (sideBarStart + 66)) {
                 if (sideBarObject->selection == k) {
@@ -63,6 +62,17 @@ static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5]
         sideBarStart = sideBarStart + 70;
     }
 
+    for (int k = 0; k < 20; k++) {
+        if (sunObjects[k].alive == 1) {
+            if (x > sunObjects[k].x && x < sunObjects[k].x + 50) {
+                if (y > sunObjects[k].y && y < sunObjects[k].y + 50) {
+                    topBarObject->amount = topBarObject->amount + sunObjects[k].worth;
+                    sunObjects[k].alive = 0;
+                }
+            }
+        }
+    }
+
     if (sideBarObject->selection != 0) {
         int cost;
         switch (sideBarObject->selection) {
@@ -70,6 +80,9 @@ static void handle_click(int x, int y, SDL_Renderer *renderer, lane laneArray[5]
                 cost = 100;
                 break;
             case 2:
+                cost = 50;
+                break;
+            case 3:
                 cost = 50;
                 break;
         }

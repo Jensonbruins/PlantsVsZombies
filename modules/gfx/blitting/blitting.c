@@ -9,7 +9,6 @@ static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y);
 static void helper_sidebar_item(SDL_Renderer *renderer, sideBar *object, int amount, int x, int y, int cost, int item);
 
 static void helper_sidebar(SDL_Renderer *renderer, int x, int y, int color);
-//static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle);
 
 static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y) {
     SDL_Rect dest;
@@ -19,22 +18,12 @@ static void blit(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y) {
     SDL_RenderCopy(renderer, txtr, NULL, &dest);
 }
 
-//static void blit_angled(SDL_Renderer *renderer, SDL_Texture *txtr, int x, int y, float angle) {
-//    SDL_Rect dest;
-//    dest.x = x;
-//    dest.y = y;
-//    SDL_QueryTexture(txtr, NULL, NULL, &dest.w, &dest.h);
-//    dest.x -= (dest.w / 2);
-//    dest.y -= (dest.h / 2);
-//    SDL_RenderCopyEx(renderer, txtr, NULL, &dest, angle, NULL, SDL_FLIP_NONE);
-//}
-
 
 extern void draw_background(SDL_Renderer *renderer, SDL_Texture *backgroundTexture) {
     blit(renderer, backgroundTexture, 0, 0);
 }
 
-extern void draw_zombie(SDL_Renderer *renderer, zombie objects[40], int amount) {
+extern void draw_zombie(SDL_Renderer *renderer, zombie objects[50], int amount) {
     for (int k = 0; k < amount; k++) {
         if (objects[k].health > 0) {
             int y;
@@ -88,9 +77,6 @@ extern void draw_zombie(SDL_Renderer *renderer, zombie objects[40], int amount) 
         }
 
     }
-//        if (zombie->state == 2) {
-//
-//        }
 }
 
 extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
@@ -115,7 +101,6 @@ extern void draw_plant(SDL_Renderer *renderer, plant *object, int x, int y) {
 extern void draw_plants(SDL_Renderer *renderer, lane laneArray[5], plant plantArray[45]) {
     for (int row = 0; row <= 4; row++) {
         int y = laneArray[row].y;
-//        printf("%d\n", y);
         for (int column = 0; column <= 8; column++) {
             int plantId = laneArray[row].blockArray[column].plantId;
             if (plantId > 45) {
@@ -132,6 +117,23 @@ extern void draw_projectile(SDL_Renderer *renderer, projectile object[50]) {
     for (int k = 0; k < 50; k++) {
         if (object[k].alive > 0) {
             blit(renderer, object[k].texture, object[k].x, object[k].y);
+        }
+    }
+}
+
+extern void draw_sun(SDL_Renderer *renderer, sun object[20]) {
+    for (int k = 0; k < 20; k++) {
+        if (object[k].alive > 0) {
+            object[k].delayCounter++;
+            if (object[k].delayCounter >= 20) {
+                if (object[k].counter == 0) {
+                    object[k].counter = 1;
+                } else {
+                    object[k].counter = 0;
+                }
+                object[k].delayCounter = 0;
+            }
+            blit(renderer, object[k].texture[object[k].counter], object[k].x, object[k].y);
         }
     }
 }
@@ -185,6 +187,11 @@ extern void draw_sidebar(SDL_Renderer *renderer, sideBar *object, topBar *topBar
 
     blit(renderer, object->texture[1], x, y); // SunFlowerSeed
     helper_sidebar_item(renderer, object, topBarObject->amount, x, y, 50, 2);
+
+    y = y + 70;
+
+    blit(renderer, object->texture[2], x, y); // Walnut
+    helper_sidebar_item(renderer, object, topBarObject->amount, x, y, 50, 3);
 }
 
 static void helper_sidebar_item(SDL_Renderer *renderer, sideBar *object, int amount, int x, int y, int cost, int item) {
