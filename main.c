@@ -22,19 +22,22 @@ int main(int argc, char *argv[]) {
     init_side_bar(renderer, &sideBarObject);
 
     zombie zombieObjects[50];
-    int amountOfZombies = 11;
+    int amountOfZombies = 14;
     int zombieArray[50][3] = {
-            {0, 1800, 1},
-            {0, 3200, 2},
-            {0, 4400, 2},
-            {1, 2000, 1},
-            {1, 2500, 1},
-            {1, 5000, 3},
-            {2, 1990, 1},
-            {3, 6600, 3},
-            {4, 2300, 2},
-            {4, 4500, 3},
-            {4, 2500, 1}
+            {0, 4200, 3},
+            {0, 6200, 2},
+            {1, 1800, 1},
+            {1, 4600, 2},
+            {1, 7000, 4},
+            {2, 2600, 1},
+            {2, 5400, 4},
+            {3, 3000, 2},
+            {3, 4600, 4},
+            {3, 6600, 4},
+            {4, 2600, 1},
+            {4, 3400, 1},
+            {4, 5000, 1},
+            {4, 7000, 2}
     };
     init_zombies(renderer, (zombie *) &zombieObjects, zombieArray, amountOfZombies);
 
